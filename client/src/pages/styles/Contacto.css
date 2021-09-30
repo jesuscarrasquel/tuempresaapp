@@ -1,0 +1,42 @@
+.contenedor-contacto {
+        padding-top: 10rem;
+}
+
+.title-contacto-container {
+    text-align: center;
+
+
+}
+
+.title-contacto-container h1 {
+
+    color: rgba(77,94,217,255);
+    font-weight: 700;
+    font-size: 3rem;
+    
+
+
+}
+
+.description-container-contacto {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    width: 80%;
+}
+
+.description-container-contacto p{
+    font-size: 1.6rem;
+    text-align: justify;
+    
+
+}
+
+.form-contacto {
+    width: 90%;
+    text-align: -webkit-center;
+    
+}
+
+.row-contacto {
+    justify-content: center;
+}

@@ -1,0 +1,238 @@
+ @media (min-width: 600px) {
+    .main {
+        /* background-image: url(../../assets/img/fondohome0.png); */
+        background-image: url(../../assets2/tuempresaportada1.jpg);
+        background-position: top right;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 100vh;
+        padding-left: 6rem;
+    }
+
+    .title-parte-1 {
+        color: #ff0000;
+        font-size: 6.5rem ;
+        padding-left: 2rem;
+
+    }
+    
+    .title-parte-2 {
+        color: #ffffff;
+        font-size: 6.5rem ;
+        font-weight: 700;   
+        padding-left: 2rem;
+
+    }
+    
+    .subtitle-portada {
+        /* text-align: center; */
+        color: #ffffff;
+        font-size: 3rem;
+        padding-left: 2rem;
+    }
+    
+    .contenedor-imagen-portada {
+        display: flex;
+        justify-content: center;
+        padding-top: 0rem;
+    }
+    
+    .contenedor-imagen-portada img {
+        width: 50rem;
+        height: 30rem;
+    }
+    
+    .contenedor-subtitle-portada {
+        display: flex;
+        /* justify-content: center; */
+    }
+
+    .contenedor-title {
+        padding-top: 8rem;
+    }
+
+    
+
+    .texto-container-azul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .texto-container-azul h1 {
+        
+        font-size: 3rem;
+        
+    }
+
+    .contenedor-ventajas-21 {
+        flex-direction: row;
+        align-items: baseline;
+        /* padding-left: 12rem;
+        padding-right: 12rem; */
+    }
+
+    .contendor-aun-mas {
+        padding-left: 12rem;
+        padding-right: 12rem; 
+
+    }
+
+    .details {
+        padding-left: 2rem;
+        font-size: 2rem;
+        text-align: justify;
+        /* padding: 2rem; */
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        
+        
+      
+    }
+
+    .type-container a {
+        text-decoration: none;
+        background-color: transparent;
+        padding: 1rem 4rem;
+        border: 1px solid rgba(77,94,217,255);
+        border-radius: 1.7rem;
+        font-weight: 700;
+        color: rgba(77,94,217,255);
+        font-size: 1.6rem;
+        
+    }
+
+    .container-mas-informacion {
+        padding-top: 5rem;
+    }
+
+    .container-mas-informacion2 {
+        padding-top: 3rem;
+    }
+
+    .type-container {
+        height: 60rem;
+
+    }
+
+    .type-container h2 {
+        padding-bottom: 1.5rem;
+        font-size: 3.5rem;
+        color: #0315d9;
+        font-weight: 700;
+    
+    }
+
+    .type-container h3 {
+        padding-bottom: 1.5rem;
+        font-size: 2.5rem;
+        color: #0315d9;
+        font-weight: 700;
+    
+    }
+
+    .subtitle-type {
+        font-size: 1.8rem;
+    }
+
+    .price-type {
+        color: #0315d9;
+        font-size: 6rem;
+    }
+
+    .type-container ul{
+        list-style-image: url("../../assets/img/check.svg");
+        text-align: start !important;
+        padding: 5rem;
+    }
+
+    .type-container li {
+        font-size: 2rem;
+    }
+    
+    .cuadros-container {
+        padding-top: 2rem;
+        flex-direction: row;
+    }
+
+    .cuadros-enlace {
+        width: 50%;
+    }
+
+    .cuadros {
+        color: #ffffff;
+        border: 0.1rem solid #ffffff;
+        border-radius: 1.4rem;
+        margin: 0.7rem;
+        padding: 1rem;
+        /* text-align: center; */
+
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .cuadros h2 {
+        font-size: 2rem;
+        font-weight: 500;
+        
+    }
+    
+    .cuadros h3, .cuadros h4 {
+        font-size: 2rem;
+        font-weight: 300;
+        
+    
+    }
+
+    .building-description {
+        padding-right: 2rem;
+    }
+    
+    .building-image {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .imagen-building {
+        width: 5rem;
+        /* height: 40%; */
+        padding-bottom: 3rem;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    
+    .form-group input {
+        width: 50%;
+    }
+
+    .form-group textarea {
+        width: 50%;
+        border-radius: 1.4rem;
+        padding-top: 1rem;
+        height: 20rem;
+    }
+
+    .enviar-container {
+        text-align: center;
+    }
+
+    .symbol-type2 {
+        font-size: 2rem;
+        color: #0315d9;
+    }
+
+    .price-type2 {
+        font-size: 3rem;
+        color: #0315d9;
+    }
+
+
+ }

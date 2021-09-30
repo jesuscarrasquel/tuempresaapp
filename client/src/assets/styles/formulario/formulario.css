@@ -1,0 +1,103 @@
+#formulario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+#formulario .row {
+    margin: 0px;
+}
+
+#formulario form .header-formulario .company-name {
+    margin-bottom: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#formulario .header-formulario .logo {
+    width: 5rem;
+    height: 5rem;
+    margin-left: 1.5rem;
+}
+
+#formulario .company-name span {
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgb(0, 61, 240);
+}
+
+#formulario form {
+    background-color: #f9f7f4;
+    padding: 2rem;
+    /* padding-bottom: 2rem; */
+    /* padding: 0rem 2rem; */
+    /* padding-top: 2rem; */
+    /* padding-left: 1rem; */
+}
+
+#formulario .title {
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+#formulario input {
+    width: 200px;
+    height: 30px;
+    outline: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    
+}
+
+/* #formulario input[type="text"] {
+    border: 1px solid #929494;
+    padding-left: 5px;
+} */
+
+#formulario h2, #formulario h3 {
+    color: #012169;
+
+}
+
+#formulario input[type="file"] {
+    width: 250px;
+    margin-bottom: 5px;
+}
+
+#passport-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#formulario .input-form {
+    flex-direction: column;
+}
+
+#formulario .plus-icon {
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+#formulario input[type="submit"] {
+    font-size: 15px;
+    padding: 5px;
+    width: 150px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#formulario p {
+    padding: 20px 0px;
+    font-size: 1.6rem;
+}
+
+.danger {
+    color: red;
+}

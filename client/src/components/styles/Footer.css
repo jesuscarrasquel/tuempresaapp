@@ -1,0 +1,21 @@
+.footer-container {
+    padding: 6rem;
+    background-color: #0315d9;
+    color: #ffffff;
+    text-align: center;
+}
+
+.footer-container p {
+    font-size: 1.6rem;
+}
+
+div a h3 {
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+div a:hover {
+    text-decoration: none;
+}
+

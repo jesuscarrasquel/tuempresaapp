@@ -1,0 +1,180 @@
+div .navbarIn {
+
+    padding: 0rem 3rem;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+
+    background-color: #ffffff;
+    z-index: 100;
+    transition: 0.4s;
+
+}
+
+.contendor-nombre-icono {
+    display: flex;
+}
+
+div .navbarIn .navbar-brand {
+    font-size: 1.8rem;
+    color: #000000;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    
+}
+
+div .navbarIn .navbar-brand img{
+    height: 7rem;
+    
+    
+}
+
+div .navbarIn .navbar-toggler {
+    border-color: rgba(0,0,0,0);
+}
+
+div .navbarIn .navbar-toggler .navbar-toggler-ico {
+    color: #ffffff;
+}
+
+div .navbar-nav {
+    font-size: 1.3rem;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+div .navbar-nav .nav-item .nav-link {
+    color: #003df0;
+    padding: 1.5rem 0rem;
+    
+}
+
+.company-name {
+    display: flex;
+    align-items: center;
+    
+
+}
+
+.navbarIn .tu-title {
+    padding-left: 0.5rem;
+    padding-right: 0.4rem;
+
+    color: gray;
+    font-weight: 700;
+}
+
+.navbarIn .empresa-title {
+
+    color: #003df0;
+    padding-right: 0.4rem;
+
+    font-weight: 700;
+
+
+}
+
+.navbarIn .us-title {
+
+    color: red;
+    float: right;
+
+    font-weight: 700;
+
+
+}
+
+.llc-enlace, .inc-enlace, .cuenta-enlace, .contacto-enlace {
+    color: #003df0;
+    font-weight: 700;
+
+}
+
+
+.navbarIn div .navbar-nav .nav-item .nav-link {
+    color: #003df0;
+    font-weight: 700;
+
+}
+
+li .dropdown-menu {
+
+    margin-top: 0rem;
+}
+
+.dropdown-menu .dropdown-item {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align:center;
+    color: #003df0;
+}
+
+div .navbarIn .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='50' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
+@media (min-width:600px) {
+
+    .navbarIn .navbar-collapse {
+        justify-content: flex-end;
+    }
+
+    div .navbarIn .navbar-brand img{
+        height: 9rem;
+        width: 9rem;
+        
+    }
+
+    div .navbarIn .navbar-brand {
+        font-size: 3rem;
+        color: #000000;
+        font-weight: 700;
+        letter-spacing: 0.05rem;
+        padding-left: 2rem;
+        
+    }
+
+    div .navbar-nav {
+        font-size: 1.3rem;
+        text-align: center;
+        background-color: transparent;
+        margin-right: 0px !important;
+    }
+
+    div .navbar-nav .nav-item .nav-link {
+        color: #000000;
+        padding: 1.5rem 4rem;
+        font-size: 2rem;
+        
+    }
+
+    .llc-enlace, .inc-enlace, .cuenta-enlace, .contacto-enlace {
+        color: #003df0;
+        font-weight: 700;
+    }
+    
+    
+    .navbarIn div .navbar-nav .nav-item .nav-link {
+        color: #003df0;
+        font-weight: 700;
+
+    }
+
+    li .dropdown-menu {
+        width: 20rem;
+        margin-top: 3rem;
+    }
+
+    .dropdown-menu .dropdown-item {
+        font-size: 1.6rem;
+        text-align:left;
+        color: #003df0;
+    }
+
+    
+    
+}
+
+

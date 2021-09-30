@@ -1,0 +1,55 @@
+/* @media (min-width:600px) {
+
+    .navbar .navbar-collapse {
+        justify-content: flex-end;
+    }
+
+    div .navbar .navbar-brand img{
+        height: 9rem;
+        width: 9rem;
+        
+    }
+
+    div .navbar .navbar-brand {
+        font-size: 3rem;
+        color: #000000;
+        font-weight: 700;
+        letter-spacing: 0.05rem;
+        padding-left: 2rem;
+        
+    }
+
+    div .navbar-nav {
+        font-size: 1.3rem;
+        text-align: center;
+        background-color: transparent;
+        margin-right: 0px !important;
+    }
+
+    div .navbar-nav .nav-item .nav-link {
+        color: #000000;
+        padding: 1.5rem 4rem;
+        font-size: 2rem;
+        
+    }
+
+    .llc-enlace, .inc-enlace, .cuenta-enlace, .contacto-enlace {
+        color: #ffffff ;
+        font-weight: 700;
+    }
+    
+    
+ 
+
+    li .dropdown-menu {
+        width: 20rem;
+        margin-top: 3rem;
+    }
+
+    .dropdown-menu .dropdown-item {
+        font-size: 1.6rem;
+        text-align:left;
+        color: #003df0;
+    }
+    
+} */
