@@ -11,10 +11,11 @@
 }
 
 #formulario form .header-formulario .company-name {
-    margin-bottom: 2rem;
+    
+    margin-bottom: 3rem;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 #formulario .header-formulario .logo {
@@ -23,24 +24,33 @@
     margin-left: 1.5rem;
 }
 
+#formulario .company-name {
+    padding-left: 2rem;
+}
+
 #formulario .company-name span {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 900;
     color: rgb(0, 61, 240);
 }
 
 #formulario form {
     background-color: #f9f7f4;
-    padding: 2rem;
-    /* padding-bottom: 2rem; */
-    /* padding: 0rem 2rem; */
-    /* padding-top: 2rem; */
-    /* padding-left: 1rem; */
+    padding: 2rem 0rem;
+    margin-bottom: 2rem;
+    /* padding: 2rem; */
+ 
 }
 
 #formulario .title {
-    padding-bottom: 2rem;
     text-align: center;
+    background: #003df0;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 #formulario input {
@@ -67,6 +77,14 @@
     margin-bottom: 5px;
 }
 
+#formulario .iconos-archivos {
+    margin: 2rem 0rem;  
+}
+
+#formulario .iconos-archivos img {
+    height: 8rem;
+}
+
 #passport-container {
     width: 100%;
     display: flex;
@@ -84,7 +102,7 @@
 
 #formulario input[type="submit"] {
     font-size: 15px;
-    padding: 5px;
+    padding: 2rem;
     width: 150px;
     height: 30px;
     align-items: center;
@@ -98,6 +116,39 @@
     font-size: 1.6rem;
 }
 
-.danger {
+#formulario .danger {
     color: red;
+}
+
+#formulario .validacion-contenedor {
+    position: absolute;
+    top: 50px;
+}
+
+#formulario .validacion-contenedor-file {
+    position: absolute;
+    top: 30px;
+}
+
+#formulario .nota {
+    font-weight: 700;
+}
+
+#formulario .alert-container {
+    background-color: #fef3eb;
+    border: .0625rem solid #ea7600;
+    margin: .1875rem 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.alert-container-icon {
+    margin-right: 2rem;
+}
+
+#formulario .alert-icon {
+    width: 50px;
+
 }
