@@ -21,6 +21,7 @@ $dotenv->load();
     $secondname =  $_POST['secondname'];
     $lastname =  $_POST['lastname'];
     $email =  $_POST['email'];
+    $pagos =  $_POST['pagos'];
 
     $nombre1 =  $_POST['nombre1'];
     $nombre2 =  $_POST['nombre2'];
@@ -79,14 +80,15 @@ try {
                 <h1>Información del cliente</h1>
 
                 <ul>
-                    <li>Primer Nombre:'. $firstname . '</li>
-                    <li>Segundo Nombre:'. $secondname . '</li>
+                    <li>Primer Nombre: '. $firstname . '</li>
+                    <li>Segundo Nombre: '. $secondname . '</li>
                     <li>Apellidos:'. $lastname . '</li>
                     <li>Correo electrónico: '. $email . '</li>
-                    <li>Nombre de empresa 1:'. $nombre1 . '</li>
-                    <li>Nombre de empresa 2:'. $nombre2 . '</li>
-                    <li>Nombre de empresa 3:'. $nombre3 . '</li>
-                    <li>Rama actividad:'. $rama .'</li>    
+                    <li>Nombre de empresa 1: '. $nombre1 . '</li>
+                    <li>Nombre de empresa 2: '. $nombre2 . '</li>
+                    <li>Nombre de empresa 3: '. $nombre3 . '</li>
+                    <li>Rama actividad: '. $rama .'</li>
+                    <li>Forma de pago: '. $pagos .'</li>    
                 </ul>  
             ';
 

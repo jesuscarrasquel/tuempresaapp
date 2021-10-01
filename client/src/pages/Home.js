@@ -546,7 +546,7 @@ class Home extends Component {
                         </div>
 
                     </div>
-
+{/* 
                     <div className="row contacto-container">
 
                         <div className="col-12">
@@ -569,27 +569,23 @@ class Home extends Component {
 
                                 <div className="form-group">
                                     
-                                    {/* <label htmlFor="nombre">Nombre</label> */}
                                     <input type="text" className="form-group" id="nombre" name="nombre" placeholder="Nombre" onChange={this.handleChange} value={this.state.form.nombre}/>
 
                                 </div>
 
                                 <div className="form-group">
 
-                                     {/* <label htmlFor="email">Email</label> */}
                                     <input type="text"  className="form-group" id="email" name="email" placeholder="Email" onChange={this.handleChange} value={this.state.form.email}/>
 
                                 </div>
 
                                 <div className="form-group">
 
-                                     {/* <label htmlFor="email">Email</label> */}
                                     <input type="text"  className="form-group" id="telefono" name="telefono" placeholder="Número de teléfono" onChange={this.handleChange} value={this.state.form.telefono}/>
 
                                 </div>
                                 
                                 <div className="form-group">
-                                {/* <label htmlFor="mensaje">Mensaje</label> */}
                                 <textarea name="mensaje" id="mensaje" cols="30" rows="10"  className="form-group" placeholder="Mensaje" onChange={this.handleChange} value={this.state.form.mensaje}></textarea>
 
                                 </div>
@@ -609,7 +605,7 @@ class Home extends Component {
                         
                     </div>
                  
-                 
+                  */}
                  
                  </div>
 

@@ -10,7 +10,7 @@ class Footer extends Component {
             <React.Fragment>
 
               
-                    <div className="footer-container container-fluid">
+                    <div className="footer-container container-fluid" id="footer">
 
                         <div className="row">
 
@@ -43,22 +43,7 @@ class Footer extends Component {
 
                             </div>
 
-                            {/* <div className="col-12 col-md-3">
-
-                                <h2>RECURSOS</h2>
-                                <br/>
-
-
-                                <h3>Blog</h3>
-                                <br/>
-
-                                <h3>FAQ</h3>
-                                <br/>
-
-                                <h3>Nuestro propósito</h3>
-                                <br/>
-
-                            </div> */}
+                     
 
                             <div className="col-12 col-md-4">
 
@@ -71,11 +56,6 @@ class Footer extends Component {
 
                                 <br/>
 
-                                {/* <h3>Aviso legal</h3>
-                                <br/>
-
-                                <h3>Política de privacidad</h3>
-                                <br/> */}
 
                             </div>
 
@@ -90,7 +70,7 @@ class Footer extends Component {
 
                             <div className="col-12">
 
-                                <p>TuempresaUS presta sus servicios como intermediario para la realización de trámites legales y bancarios en los Estados Unidos de América, para lo cual contrata servicios de terceros ubicados en el país, sin ser parte alguna de consorcios, entidades gubernamentales, entidades estatales, o alguna otra clase de entes que otorguen derechos de registrabilidad de empresas en Estados Unidos; así como tampoco posee alianzas, sociedad comercial o relación directa alguna con entidades bancarias del país.
+                                <p className="footer-color">TuempresaUS presta sus servicios como intermediario para la realización de trámites legales y bancarios en los Estados Unidos de América, para lo cual contrata servicios de terceros ubicados en el país, sin ser parte alguna de consorcios, entidades gubernamentales, entidades estatales, o alguna otra clase de entes que otorguen derechos de registrabilidad de empresas en Estados Unidos; así como tampoco posee alianzas, sociedad comercial o relación directa alguna con entidades bancarias del país.
 
                                 TuempresaUS no provee ni pretende entregar ningún tipo de servicio, consejo o asesoría fiscal o legal a sus clientes y usuarios. Todo tipo de información publicada que se relacione con ello corresponde exclusivamente a información de conocimiento público.
 
