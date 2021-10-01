@@ -55,6 +55,7 @@ const Formulario = () => {
   const [ firstName, setfirstName ] = useState(false)
   const [ secondName, setSecondName ] = useState(false)
   const [ lastName, setThirdName ] = useState(false)
+  const [ correo, setCorreo ] = useState(false)
   const [ firstCompanyName, setFirstCompanyName ] = useState(false)
   const [ secondCompanyName, setSecondCompanyName ] = useState(false)
   const [ thirdCompanyName, setThirdCompanyName ] = useState(false)
@@ -64,6 +65,7 @@ const Formulario = () => {
     focusInputFirstName: firstName ? "form__label active" : "form__label",
     focusInputSecondName: secondName ? "form__label active" : "form__label",
     focusInputLastName: lastName ? "form__label active" : "form__label",
+    focusInputCorreo: correo ? "form__label active" : "form__label",
     focusInputfirstCompanyName: firstCompanyName ? "form__label active" : "form__label",
     focusInputsecondCompanyName: secondCompanyName ? "form__label active" : "form__label",
     focusInputthirdCompanyName: thirdCompanyName ? "form__label active" : "form__label",
@@ -188,8 +190,10 @@ const Formulario = () => {
                       type="text"
                       className="form__input"
                       placeholder=""
+                      id="correo"
+                      onBlur={() => setCorreo(!correo)}
                     />
-                    <label for="" className="form__label">Correo electrónico*</label>
+                    <label for="correo" onClick={() => setCorreo(!correo)} className="form__label">Correo electrónico*</label>
 
                     <div className="validacion-contenedor">
 
