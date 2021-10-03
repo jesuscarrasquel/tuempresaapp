@@ -41,17 +41,21 @@ try {
     //Server settings
     $username = $_ENV['USERNAME'];
     $password = $_ENV['PASSWORD'];
+    $host = $_ENV['HOST'];
+    $smtpsecure = $_ENV['SMTPSECURE'];
+    $port = $_ENV['PORT'];
+    
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
     // $mail->Host       = 'mail.tuempresa.us';                     //Set the SMTP server to send through
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->Host       = $port;                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     // $mail->Username   = 'info@tuempresa.us';                     //SMTP username
     $mail->Username   = $username;                     //SMTP username
     // $mail->Password   = 'tqmO$X*pFMq~';                               //SMTP password
     $mail->Password   = $password;                               //SMTP password
-    $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->SMTPSecure = $smtpsecure;            //Enable implicit TLS encryption
+    $mail->Port       = $port;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom($username, 'Tu Empresa US');
