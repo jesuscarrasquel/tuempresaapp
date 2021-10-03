@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cards from '../components/Cards';
 import './styles/Home.css';
 import './styles/Homedesktop.css';
 import Navbar from '../components/Navbar';
@@ -23,7 +24,6 @@ import banderamorada from '../assets2/receive-mail.svg';
 import casatarjeta from '../assets/img/casa-tarjeta.svg';
 import logoportada from '../assets2/portada-logo3.png';
 import { sendEmail } from '../api/peticiones';
-import * as cons from '../api/constants';
 import logoWhatsapp from '../assets/icons/logo-whatsapp.svg';
 
 import { Link } from 'react-router-dom';
@@ -115,15 +115,12 @@ class Home extends Component {
                        </div>
                        <div className="col-12 col-md-4">
 
-                            {/* <img src={logoportada} alt=""/> */}
                        </div>
                    </div>
 
                    <div className="row animate__animated animate__fadeIn">
 
                         <div className="col-12 col-md-12 contenedor-imagen-portada">
-
-                            {/* <img src={Imagen_1} alt="" className="imagen-portada"/> */}
                             
                         </div>
 
@@ -138,84 +135,17 @@ class Home extends Component {
                             </h2>
                         </div>
                     </div>
-
-                    
+                  
                     <div className="col-12 col-md-7">
 
                         <div className="container-textos">
-
-                        
-                            <div className="cuadros-container" >
-
-                                <a href="#planes" className="cuadros-enlace" >
-                                    <div className="cuadros">
-
-
-                                        <div className="building-description">
-                                                <h2>Plan Básico</h2>
-                                                {/* <h3>Sociedad</h3> */}
-
-                                                <h4>Cuenta online o en PR</h4>
-
-                                        </div>
-
-                                        <div className="building-image">
-                                            {/* <img src= {Building} alt="" className="imagen-building"/> */}
-
-                                        </div>
-
-                                    </div>
-
-                                </a>
-
-                                <a href="#planes" className="cuadros-enlace" >
-                                    <div className="cuadros">
-
-
-                                        <div className="building-description">
-                                                <h2>Plan Plus</h2>
-                                                {/* <h3>Sociedad</h3> */}
-
-                                                <h4>Cuenta en banco tradicional en US con Zelle Jurídico</h4>
-
-                                        </div>
-
-                                        <div className="building-image">
-                                            {/* <img src= {Building} alt="" className="imagen-building"/> */}
-
-                                        </div>
-
-                                    </div>
-
-                                </a>
-
-                                <a href="#planes" className="cuadros-enlace" >
-
-                                    <div className="cuadros">
-
-                                        <div className="building-description">
-                                            <h2>Plan Corporativo</h2>
-                                            {/* <h3>Incorporación</h3> */}
-                                            <h4>2 cuentas en banco tradicional con Zelle Jurídico</h4>
-
-                                        </div>
-
-                                        <div className="building-image">
-                                            
-                                        </div>
-                                    </div>
-                                    
-                                </a>
-
-                            </div>                    
-
-   
+      
+                            <Cards />
+     
                         </div>
 
                     </div>
-
-
-                   
+           
                </div>
 
                 <div className="container second-container">

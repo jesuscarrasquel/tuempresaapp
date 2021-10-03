@@ -21,13 +21,13 @@ const Formulario = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { firstname, secondname, lastname, email, nombre1, nombre2, nombre3, passport, rama, selfie, pagos } = data;
-    const type = "register";
+    const { firstName, secondName, lastName, email, nombre1, nombre2, nombre3, passport, rama, selfie, pagos } = data;
+    const type = "formulario";
  
     const f = new FormData();
-    f.append("firstname", firstname);
-    f.append("secondname", secondname);
-    f.append("lastname", lastname);
+    f.append("firstName", firstName);
+    f.append("secondName", secondName);
+    f.append("lastName", lastName);
     f.append("email", email);
     f.append("nombre1", nombre1);
     f.append("nombre2", nombre2);
@@ -47,87 +47,48 @@ const Formulario = () => {
     const boton = document.getElementById("boton-enviar");
     boton.disabled = true;
 
-    const res_email= await sendEmail(f);
-    console.log(res_email, data);
+    const res = await sendEmail(f);
+
+    console.log(res)
 
   };
 
-  const [ firstname, setfirstName ] = useState(false)
-  const [ secondName, setSecondName ] = useState(false)
-  const [ lastName, setLastName ] = useState(false)
-  const [ correo, setCorreo ] = useState(false)
-  const [ firstCompanyName, setFirstCompanyName ] = useState(false)
-  const [ secondCompanyName, setSecondCompanyName ] = useState(false)
-  const [ thirdCompanyName, setThirdCompanyName ] = useState(false)
-  const [ rama, setRama ] = useState(false)
-  
+  const [state, setState] = useState({
+    firstName: false,
+    secondName: false,
+    lastName: false,
+    correo: false,
+    firstCompanyName: false,
+    secondCompanyName: false,
+    thirdCompanyName: false,
+    rama: false,
+  });
+
   const classes = {
-    focusInputFirstName: firstname ? "form__label active" : "form__label",
-    focusInputSecondName: secondName ? "form__label active" : "form__label",
-    focusInputLastName: lastName ? "form__label active" : "form__label",
-    focusInputCorreo: correo ? "form__label active" : "form__label",
-    focusInputfirstCompanyName: firstCompanyName ? "form__label active" : "form__label",
-    focusInputsecondCompanyName: secondCompanyName ? "form__label active" : "form__label",
-    focusInputthirdCompanyName: thirdCompanyName ? "form__label active" : "form__label",
-    focusInputrama: rama ? "form__label active" : "form__label",
+    focusInputfirstName: state.firstName ? "form__label active" : "form__label",
+    focusInputsecondName: state.secondName ? "form__label active" : "form__label",
+    focusInputlastName: state.lastName ? "form__label active" : "form__label",
+    focusInputCorreo: state.correo ? "form__label active" : "form__label",
+    focusInputfirstCompanyName: state.firstCompanyName ? "form__label active" : "form__label",
+    focusInputsecondCompanyName: state.secondCompanyName ? "form__label active" : "form__label",
+    focusInputthirdCompanyName: state.thirdCompanyName ? "form__label active" : "form__label",
+    focusInputrama: state.rama ? "form__label active" : "form__label",
 
 }
 
 const handleInput = (e) => {
 
-  let valor = document.getElementById(e.target.id).value;
-  console.log(e.target.id, "epa")
-  if(e.target.name === "firstname") {
-    if(valor === "") {
-      setfirstName(false)
-    }
-  }
-
-  if(e.target.name === "secondname") {
-    if(valor === "") {
-      setSecondName(false)
-    }
-  }
-
-  if(e.target.name === "lastname") {
-    if(valor === "") {
-      setLastName(false)
-    }
-  }
-
-  if(e.target.name === "email") {
-    if(valor === "") {
-      setCorreo(false)
-    }
-  }
-
-  if(e.target.name === "nombre1") {
-    if(valor === "") {
-      setFirstCompanyName(false)
-    }
-  }
-  if(e.target.name === "nombre2") {
-    if(valor === "") {
-      setSecondCompanyName(false)
-    }
-  }
-  if(e.target.name === "nombre3") {
-    if(valor === "") {
-      setThirdCompanyName(false)
-    }
-  }
-  if(e.target.name === "rama") {
-    if(valor === "") {
-      setRama(false)
-    }
-  }
-
-
+  if(e.target.value === "") {
+    setState({
+      ...state,
+      [e.target.name]: false
+    })
+  }  
+ 
 }
 
   return (
     <div id="formulario">
-      {console.log(correo, firstname, "mira")}
 
       <form onSubmit={handleSubmit(onSubmit)}>
       <div className="header-formulario">
@@ -168,18 +129,18 @@ const handleInput = (e) => {
                 <Col md="3" xs="12">
                   <div className="form__div">
                     <input
-                      {...register("firstname", { required: true })}
+                      {...register("firstName", { required: true })}
                       type="text"
                       className="form__input"
                       placeholder=""
-                      id="firstname"
+                      id="firstName"
                       onBlur={handleInput}
-                      onClick={() => setfirstName(true)}
+                      onClick={() => setState({...state, firstName: true})}
                     />
-                    <label for="firstname" className={classes.focusInputFirstName} onClick={() => setfirstName(true)}>Primer nombre*</label>
+                    <label for="firstName" className={classes.focusInputfirstName} onClick={() => setState({...state, firstName: true})}>Primer nombre*</label>
 
                     <div className="validacion-contenedor">
-                      {errors.firstname && <span className="danger">Este campo es requerido</span>}
+                      {errors.firstName && <span className="danger">Este campo es requerido</span>}
                     </div>
 
 
@@ -189,18 +150,18 @@ const handleInput = (e) => {
                   <div className="form__div">
 
                   <input
-                    {...register("secondname", { required: true })}
+                    {...register("secondName", { required: true })}
                     type="text"
                     className="form__input"
                     placeholder=""
-                    id="secondname"
+                    id="secondName"
                     onBlur={handleInput}
-                    onClick={() => setSecondName(true)}
+                    onClick={() => setState({...state, secondName: true})}
                   />
-                    <label for="secondname" className={classes.focusInputSecondName} onClick={() => setSecondName(true)}>Segundo nombre*</label>
+                    <label for="secondName" className={classes.focusInputsecondName} onClick={() => setState({...state, secondName: true})}>Segundo nombre*</label>
 
                     <div className="validacion-contenedor">
-                      {errors.secondname && <span className="danger">Este campo es requerido</span>}
+                      {errors.secondName && <span className="danger">Este campo es requerido</span>}
                       
                     </div>
                   </div>
@@ -210,18 +171,18 @@ const handleInput = (e) => {
                   <div className="form__div">
 
                     <input
-                      {...register("lastname", { required: true })}
+                      {...register("lastName", { required: true })}
                       type="text"
                       className="form__input"
                       placeholder=""
-                      id="lastname"
+                      id="lastName"
                       onBlur={handleInput}
-                      onClick={() => setLastName(true)}
+                      onClick={() => setState({...state, lastName: true})}
                     />
-                    <label for="lastname" className={classes.focusInputLastName} onClick={() => setLastName(true)}>Apellidos*</label>                  
+                    <label for="lastName" className={classes.focusInputlastName} onClick={() => setState({...state, lastName: true})}>Apellidos*</label>                  
                     <div className="validacion-contenedor">
                       
-                      {errors.lastname && <span className="danger">Este campo es requerido</span>}
+                      {errors.lastName && <span className="danger">Este campo es requerido</span>}
                     </div>
                   </div>
                 </Col>
@@ -242,9 +203,9 @@ const handleInput = (e) => {
                       placeholder=""
                       id="correo"
                       onBlur={handleInput}
-                      onClick={() => setCorreo(true)}
+                      onClick={() => setState({...state, correo: true})}
                     />
-                    <label for="correo" onClick={() => setCorreo(true)} className={classes.focusInputCorreo}>Correo electrónico*</label>
+                    <label for="correo" onClick={() => setState({...state, correo: true})} className={classes.focusInputCorreo}>Correo electrónico*</label>
 
                     <div className="validacion-contenedor">
 
@@ -334,15 +295,15 @@ const handleInput = (e) => {
       
                   <Col md="3" xs="12">
                     <div className="form__div">
-                      <input {...register("nombre1", { required: true })} 
+                      <input {...register("firstCompanyName", { required: true })} 
                       type="text" 
                       className="form__input"
                       placeholder="" 
                       id="fistCompanyName"
                       onBlur={handleInput}
-                      onClick={() => setFirstCompanyName(true)}
+                      onClick={() => setState({...state, firstCompanyName: true})}
                       />
-                      <label className={classes.focusInputfirstCompanyName} for="fistCompanyName" onClick={() => setFirstCompanyName(true)}>1º nombre*</label>
+                      <label className={classes.focusInputfirstCompanyName} for="fistCompanyName" onClick={() => setState({...state, firstCompanyName: true})}>1º nombre*</label>
                       <br />
 
                       <div className="validacion-contenedor">
@@ -356,16 +317,16 @@ const handleInput = (e) => {
 
                     <div className="form__div">
 
-                      <input {...register("nombre2", { required: true })} 
+                      <input {...register("secondCompanyName", { required: true })} 
                       type="text"
                       className="form__input"
                       placeholder=""
                       id="secondCompanyName"
                       onBlur={handleInput}
-                      onClick={() => setSecondCompanyName(true)}
+                      onClick={() => setState({...state, secondCompanyName: true})}
                       />
 
-                      <label className={classes.focusInputsecondCompanyName} onClick={() => setSecondCompanyName(true)} for="secondCompanyName">2º nombre*</label>
+                      <label className={classes.focusInputsecondCompanyName} onClick={() => setState({...state, secondCompanyName: true})} for="secondCompanyName">2º nombre*</label>
                       <br />
 
                       <div className="validacion-contenedor">
@@ -378,16 +339,16 @@ const handleInput = (e) => {
                   <Col md="3" xs="12">
                     <div className="form__div">
 
-                      <input {...register("nombre3", { required: true })} 
+                      <input {...register("thirdCompanyName", { required: true })} 
                       type="text" 
                       className="form__input"
                       placeholder=""
                       id="thirdCompanyName"
                       onBlur={handleInput}
-                      onClick={() => setThirdCompanyName(true)}
+                      onClick={() => setState({...state, thirdCompanyName: true})}
                       />
 
-                      <label className={classes.focusInputthirdCompanyName} for="thirdCompanyName" onClick={() => setThirdCompanyName(true)}>3º nombre*</label>
+                      <label className={classes.focusInputthirdCompanyName} for="thirdCompanyName" onClick={() => setState({...state, thirdCompanyName: true})}>3º nombre*</label>
                       <br />
 
                       <div className="validacion-contenedor">
@@ -415,9 +376,9 @@ const handleInput = (e) => {
                       placeholder=""
                       id="rama"
                       onBlur={handleInput}
-                      onClick={() => setRama(true)}
+                      onClick={() => setState({...state, rama: true})}
                       />
-                      <label className={classes.focusInputrama} for="rama" onClick={() => setRama(true)}>Ramo de la actividad*</label>
+                      <label className={classes.focusInputrama} for="rama" onClick={() => setState({...state, rama: true})}>Ramo de la actividad*</label>
                       <br />
 
                       <div className="validacion-contenedor">
