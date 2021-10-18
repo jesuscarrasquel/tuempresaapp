@@ -21,7 +21,7 @@ const Formulario = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { firstName, secondName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, rama, selfie, pagos } = data;
+    const { firstName, secondName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, plan, actividad, selfie, pagos } = data;
     const type = "formulario";
  
     const f = new FormData();
@@ -32,7 +32,8 @@ const Formulario = () => {
     f.append("firstCompanyName", firstCompanyName);
     f.append("secondCompanyName", secondCompanyName);
     f.append("thirdCompanyName", thirdCompanyName);
-    f.append("rama", rama);
+    f.append("plan", plan);
+    f.append("actividad", actividad);
     f.append("pagos", pagos);
 
     for(const item in passport){
@@ -46,6 +47,8 @@ const Formulario = () => {
     
     const boton = document.getElementById("boton-enviar");
     boton.disabled = true;
+
+    setSuccessState(true)
 
     const res = await sendEmail(f);
 
@@ -86,6 +89,8 @@ const handleInput = (e) => {
   }  
  
 }
+
+const [successState, setSuccessState] = useState(false);
 
   return (
     <div id="formulario">
@@ -286,8 +291,7 @@ const handleInput = (e) => {
                 <Row className="mb-4">
                   <Col md="12" xs="12">
                     <Label htmlFor="">
-                      Proporcionar 3 opciones de nombre para la empresa y el ramo
-                      de actividad de la misma. (Colocar solo 3 opciones)
+                      Proporcionar 3 opciones de nombre para la empresa.
                     </Label>
                   </Col>
                 </Row>
@@ -366,9 +370,29 @@ const handleInput = (e) => {
 
               <Row className="mb-4 input-form">
 
-                  <Col md="3" xs="12" className="mb-5">
+                  <Col md="5" xs="12">
+                    <Label htmlFor="">
+                      Selecciona un plan:
+                    </Label>
+                  </Col>
 
-                    <div className="form__div">
+                  <Col md="3" xs="12" className="mb-5">
+                  <div className="form__div">
+
+                    <select {...register("plan", { required: true, pattern: { value: /[^seleccionar]/ } })} className="form__input">
+                      <option value="seleccionar">Seleccionar</option>
+                      <option value="Basico">Básico</option>
+                      <option value="Plus">Plus</option>
+                      <option value="Corporativo">Corporativo</option>
+                    </select>
+                    <div className="validacion-contenedor">
+
+                    {errors.plan && <span className="danger">Este campo es requerido</span>}
+                    </div>
+
+                  </div>
+
+                    {/* <div className="form__div">
 
                       <input {...register("rama", { required: true })} 
                       type="text" 
@@ -385,11 +409,42 @@ const handleInput = (e) => {
                         
                       {errors.rama && <span className="danger">Este campo es requerido</span>}
                         </div>
-                    </div>
+                    </div> */}
                   </Col>
                 
 
               </Row>
+
+              
+              <Row className="mb-4 input-form">
+
+                  <Col md="5" xs="12">
+                    <Label htmlFor="">
+                      ¿Realizará actividad económica en los Estados Unidos?
+                    </Label>
+                  </Col>
+
+                  <Col md="3" xs="12" className="mb-5">
+                  <div className="form__div">
+
+                    <select {...register("actividad", { required: true, pattern: { value: /[^seleccionar]/ } })} className="form__input">
+                      <option value="seleccionar">Seleccionar</option>
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                      <option value="No estoy seguro">No estoy seguro</option>
+                    </select>
+                    <div className="validacion-contenedor">
+
+                    {errors.actividad && <span className="danger">Este campo es requerido</span>}
+                    </div>
+
+                  </div>
+
+                  </Col>
+                
+              </Row>
+
+              
 
               <Row className="mb-4 mt-4 input-form">
                 <Row className="mb-4 align-items-center">
@@ -437,13 +492,33 @@ const handleInput = (e) => {
                   </div>
                
                 </Col>
-            </Row>
+              </Row>
 
               <Row>
               <Col md="12">
                 <input type="submit" class="btn btn-primary boton-enviar" id="boton-enviar" value="Enviar" />
               </Col>
             </Row>
+
+            {
+              successState && (
+                <Row className='mt-4'>
+                <Col className="success-container">
+                  <div className="alert-container-icon">
+
+                    <img src={alertIcon} alt="alert-icon" className="alert-icon"/>
+                  </div>
+                  <div className="alert-nota">
+
+                      <p className="nota">
+                        Su Información se ha enviado exitosamente.
+                      </p>
+                  </div>
+               
+                </Col>
+              </Row>
+              )
+            }
 
           </Col>
         </Row>

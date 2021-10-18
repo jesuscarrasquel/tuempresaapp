@@ -144,6 +144,16 @@
     margin-bottom: 4rem;
 }
 
+#formulario .success-container {
+    background-color: #fef3eb;
+    border: .0625rem solid #22bb33;
+    margin: .1875rem 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
 .alert-container-icon {
     margin-right: 2rem;
 }
