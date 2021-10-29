@@ -4,29 +4,27 @@ import { Row, Col, Label } from "reactstrap";
 import { sendEmail } from '../api/peticiones';
 import "../assets/styles/formulario/formulario.css";
 import "../assets/styles/formulario/formularioDesktop.css";
-
 import passportIcon from '../assets/icons/icons8-passport-60.png';
 import selfieIcon from '../assets/icons/icons8-selfie-60.png';
 import paymentIcon from '../assets/icons/icons8-payment-64.png';
 import alertIcon from '../assets/icons/exclamation-triangle-solid.svg';
-
 import Logo from '../assets2/logo-sinfondo2.png';
 
 const Formulario = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
+
   const onSubmit = async (data) => {
-    const { firstName, secondName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, plan, actividad, selfie, pagos } = data;
+    const { firstName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, plan, actividad, selfie, pagos } = data;
     const type = "formulario";
  
+    console.log(data, "data")
     const f = new FormData();
     f.append("firstName", firstName);
-    f.append("secondName", secondName);
     f.append("lastName", lastName);
     f.append("email", email);
     f.append("firstCompanyName", firstCompanyName);
@@ -56,15 +54,15 @@ const Formulario = () => {
 
   };
 
+  
   const [state, setState] = useState({
+    sociosState: [],
     firstName: false,
-    secondName: false,
     lastName: false,
     email: false,
     firstCompanyName: false,
     secondCompanyName: false,
     thirdCompanyName: false,
-    rama: false,
   });
 
   const classes = {
@@ -75,7 +73,6 @@ const Formulario = () => {
     focusInputfirstCompanyName: state.firstCompanyName ? "form__label active" : "form__label",
     focusInputsecondCompanyName: state.secondCompanyName ? "form__label active" : "form__label",
     focusInputthirdCompanyName: state.thirdCompanyName ? "form__label active" : "form__label",
-    focusInputrama: state.rama ? "form__label active" : "form__label",
 
 }
 
@@ -91,6 +88,81 @@ const handleInput = (e) => {
 }
 
 const [successState, setSuccessState] = useState(false);
+const [socios, setSocios] = useState(2);
+
+const agregarSocio = () => {
+  setSocios(socios + 1 );
+  const newPartnerFirstName = document.getElementById("newPartner__firstName") 
+  const newPartnerSecondName = document.getElementById("newPartner__secondName") 
+  const newPartnerEmail = document.getElementById("newPartner__email") 
+  // const content = `<div className='form__div'> <input {${{...register('firstName', { required: true })}}} type='text' className='form__input' placeholder='' id='firstName' onBlur=${{handleInput}} onClick=${ () => setState({...state, firstName: true}) } /> <label for='firstName' className={${classes.focusInputfirstName}} onClick={${() => setState({...state, firstName: true})}}>Primer nombre*</label> <div className='validacion-contenedor'> {${errors.firstName && <span className='danger'>Este campo es requerido</span>}} </div> </div>`
+  // newPartnerFirstName.innerHTML = content
+  console.log(socios, "socios")
+
+  // Primer Nombre
+
+  const divFirstName = document.createElement("div")
+  divFirstName.setAttribute("class", "form__div")
+
+  const inputFirstName = document.createElement("input")
+  inputFirstName.setAttribute("class", "form__input")
+  inputFirstName.id = `firstName__${socios}`
+  inputFirstName.name = `firstName__${socios}`
+  
+  const labelFirstName = document.createElement("label")
+  labelFirstName.setAttribute("class", `${classes.focusInputfirstName}`)
+  labelFirstName.setAttribute("for", `firstName__${socios}`)
+  labelFirstName.textContent = "Primer Nombre"
+  
+  divFirstName.appendChild(inputFirstName)
+  newPartnerFirstName.appendChild(divFirstName)
+  divFirstName.appendChild(labelFirstName)
+
+  // setState({
+  //   ...state,
+  //   sociosState: [...socios, ]
+  // })
+
+  // document.addEventListener('onblur', handleInput)
+
+  // Segundo Nombre
+  // const divSecondName = document.createElement("div")
+  // divSecondName.setAttribute("class", "form__div")
+
+  // const inputSecondName = document.createElement("input")
+  // inputSecondName.setAttribute("class", "form__input")
+  // inputSecondName.setAttribute("onblur", handleInput)
+  // inputSecondName.id = "firstName__second"
+
+  // const labelSecondName = document.createElement("label")
+  // labelSecondName.setAttribute("class", `${classes.focusInputfirstName}`)
+  // labelSecondName.setAttribute("for", `firstName__second`)
+  // labelSecondName.textContent = "Segundo Nombre"
+
+  // divSecondName.appendChild(inputSecondName)
+  // newPartnerSecondName.appendChild(divSecondName)
+  // divSecondName.appendChild(labelSecondName)
+
+  // Correo
+  // const divEmail = document.createElement("div")
+  // divEmail.setAttribute("class", "form__div")
+
+  // const inputEmail = document.createElement("input")
+  // inputEmail.setAttribute("class", "form__input")
+  // inputEmail.setAttribute("onblur", handleInput)
+  // inputEmail.id = "firstName__second"
+
+  // const labelEmail = document.createElement("label")
+  // labelEmail.setAttribute("class", `${classes.focusInputfirstName}`)
+  // labelEmail.setAttribute("for", `firstName__second`)
+  // labelEmail.textContent = "Correo electrónico"
+
+  // divEmail.appendChild(inputEmail)
+  // newPartnerEmail.appendChild(divEmail)
+  // divEmail.appendChild(labelEmail)
+
+
+}
 
   return (
     <div id="formulario">
@@ -151,26 +223,7 @@ const [successState, setSuccessState] = useState(false);
 
                   </div>
                 </Col>
-                <Col md="3" xs="12">
-                  <div className="form__div">
-
-                  <input
-                    {...register("secondName", { required: true })}
-                    type="text"
-                    className="form__input"
-                    placeholder=""
-                    id="secondName"
-                    onBlur={handleInput}
-                    onClick={() => setState({...state, secondName: true})}
-                  />
-                    <label for="secondName" className={classes.focusInputsecondName} onClick={() => setState({...state, secondName: true})}>Segundo nombre*</label>
-
-                    <div className="validacion-contenedor">
-                      {errors.secondName && <span className="danger">Este campo es requerido</span>}
-                      
-                    </div>
-                  </div>
-                </Col>
+               
                 <Col md="3" xs="12">
 
                   <div className="form__div">
@@ -191,11 +244,6 @@ const [successState, setSuccessState] = useState(false);
                     </div>
                   </div>
                 </Col>
-                    
-              
-              </Row>
-
-              <Row className="mb-4 input-form">
 
                 <Col md="3" xs="12">
 
@@ -216,16 +264,44 @@ const [successState, setSuccessState] = useState(false);
 
                       {errors.email && <span className="danger">Este campo es requerido</span>}
                       
-                      </div>
+                    </div>
 
                   </div>
                 </Col>
-                
-                <hr />
+          
               </Row>
 
-              <Row>
-              </Row>
+              {/* Agregar socio */}
+
+                {/* <Row>
+                    <Col md="3" xs="12">
+                    
+                      <div className="newPartner" id="newPartner__firstName"></div> 
+
+                    </Col>
+                    <Col md="3" xs="12">
+                    
+                      <div className="newPartner" id="newPartner__secondName"></div> 
+
+                    </Col>
+                    <Col md="3" xs="12">
+                    
+                      <div className="newPartner" id="newPartner__email"></div> 
+
+                    </Col>
+                </Row>
+
+                <Row className="mb-4 input-form">
+
+                  <Col md="3" xs="12">
+
+                    <i class="fas fa-plus-circle" onClick={agregarSocio}></i>
+                  
+                  </Col>
+            
+                  <hr />
+                </Row> */}
+
             </Row>
 
               <Row className="mb-4 input-form">
@@ -392,24 +468,6 @@ const [successState, setSuccessState] = useState(false);
 
                   </div>
 
-                    {/* <div className="form__div">
-
-                      <input {...register("rama", { required: true })} 
-                      type="text" 
-                      className="form__input"
-                      placeholder=""
-                      id="rama"
-                      onBlur={handleInput}
-                      onClick={() => setState({...state, rama: true})}
-                      />
-                      <label className={classes.focusInputrama} for="rama" onClick={() => setState({...state, rama: true})}>Ramo de la actividad*</label>
-                      <br />
-
-                      <div className="validacion-contenedor">
-                        
-                      {errors.rama && <span className="danger">Este campo es requerido</span>}
-                        </div>
-                    </div> */}
                   </Col>
                 
 
@@ -443,8 +501,6 @@ const [successState, setSuccessState] = useState(false);
                   </Col>
                 
               </Row>
-
-              
 
               <Row className="mb-4 mt-4 input-form">
                 <Row className="mb-4 align-items-center">

@@ -10,6 +10,11 @@
     margin: 0px;
 }
 
+#formulario i {
+    font-size: 4rem;
+    cursor: pointer;
+}
+
 #formulario form .header-formulario .company-name {
     
     margin-bottom: 3rem;
