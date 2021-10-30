@@ -273,7 +273,7 @@ const agregarSocio = () => {
 
               {/* Agregar socio */}
 
-                {/* <Row>
+                <Row>
                     <Col md="3" xs="12">
                     
                       <div className="newPartner" id="newPartner__firstName"></div> 
@@ -300,7 +300,7 @@ const agregarSocio = () => {
                   </Col>
             
                   <hr />
-                </Row> */}
+                </Row>
 
             </Row>
 
