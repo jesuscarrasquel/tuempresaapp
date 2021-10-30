@@ -21,6 +21,8 @@ const Formulario = () => {
   const onSubmit = async (data) => {
     const { firstName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, plan, actividad, selfie, pagos } = data;
     const type = "formulario";
+
+    
  
     console.log(data, "data")
     const f = new FormData();
