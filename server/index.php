@@ -97,20 +97,22 @@ try {
     $mail->isHTML(true);   //Set email format to HTML
 
 
-                $message = '
-    
-                <h1>Información del cliente</h1>
+                    $message = '
+                    
+                    <h1>Información del cliente</h1>
 
-                <ul>
-                    <li>Primer Nombre: '. $firstName . '</li>
-                    <li>Apellidos:'. $lastName . '</li>
-                    <li>Correo electrónico: '. $email . '</li>
-                    <li>Nombre de empresa 1: '. $nombre1 . '</li>
-                    <li>Nombre de empresa 2: '. $nombre2 . '</li>
-                    <li>Nombre de empresa 3: '. $nombre3 . '</li>
-                    <li>Forma de pago: '. $pagos .'</li>    
-                </ul>  
-            ';
+                    <ul>
+                        <li>Primer Nombre: '. $firstName . '</li>
+                        <li>Apellidos:'. $lastName . '</li>
+                        <li>Correo electrónico: '. $email . '</li>
+                        <li>Nombre de empresa 1: '. $nombre1 . '</li>
+                        <li>Nombre de empresa 2: '. $nombre2 . '</li>
+                        <li>Nombre de empresa 3: '. $nombre3 . '</li>
+                        <li>Plan: '. $plan .'</li>
+                        <li>Actividad económica: '. $actividad .'</li>
+                        <li>Forma de pago: '. $pagos .'</li>    
+                    </ul>  
+                ';
 
                 $mail->Subject = 'Tu Empresa US';
                 $mail->Body    = $message.'/n'.$messagePartner;
