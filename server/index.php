@@ -115,7 +115,6 @@ try {
                 $mail->Subject = 'Tu Empresa US';
                 $mail->Body    = $message.'/n'.$messagePartner;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
                 $mail->send();
                 echo 'Message has been sent';
 } catch (Exception $e) {
