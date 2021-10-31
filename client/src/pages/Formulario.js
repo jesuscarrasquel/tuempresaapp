@@ -21,8 +21,6 @@ const Formulario = () => {
   const onSubmit = async (data) => {
     const { firstName, lastName, email, firstCompanyName, secondCompanyName, thirdCompanyName, passport, plan, actividad, selfie, pagos } = data;
     const type = "formulario";
-
-    
  
     console.log(data, "data")
     const f = new FormData();
@@ -43,7 +41,22 @@ const Formulario = () => {
     const pass_length = passport.length;
     f.append('cantidad_pass', pass_length);
     f.append("selfie", selfie[0]);
-    f.append("type", type);  
+    f.append("type", type); 
+    
+    let arrSocios = []
+    for(let i=1; i < socios; i++) {
+      
+      const partnerFirstName = document.getElementById(`firstName__${i}`).value
+      f.append(`socios-${i}`, partnerFirstName)
+      arrSocios.push(partnerFirstName)
+      console.log(partnerFirstName, "partner")
+      
+    }
+
+    const socios_length = socios;
+    f.append('cantidad_socios', socios_length);
+
+    console.log(arrSocios, "arr")
     
     const boton = document.getElementById("boton-enviar");
     boton.disabled = true;
@@ -53,6 +66,8 @@ const Formulario = () => {
     const res = await sendEmail(f);
 
     console.log(res)
+
+
 
   };
 
@@ -90,7 +105,7 @@ const handleInput = (e) => {
 }
 
 const [successState, setSuccessState] = useState(false);
-const [socios, setSocios] = useState(2);
+const [socios, setSocios] = useState(1);
 
 const agregarSocio = () => {
   setSocios(socios + 1 );

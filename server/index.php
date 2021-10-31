@@ -18,15 +18,12 @@ $dotenv->load();
     unset($_POST['METHOD']);
 
     $firstName =  $_POST['firstName'];
-    $secondName =  $_POST['secondName'];
     $lastName =  $_POST['lastName'];
     $email =  $_POST['email'];
     $pagos =  $_POST['pagos'];
-
     $nombre1 =  $_POST['firstCompanyName'];
     $nombre2 =  $_POST['secondCompanyName'];
     $nombre3 =  $_POST['thirdCompanyName'];
-    $rama =  $_POST['rama'];
     $file_tmp = $_FILES['selfie']['tmp_name'];
     $file_name = $_FILES['selfie']['name'];
     $type = $_POST['type'];
@@ -39,16 +36,16 @@ $mail = new PHPMailer(true);
 try {
 
     //Server settings
-    $username = $_ENV['USERNAME'];
-    $password = $_ENV['PASSWORD'];
-    $host = $_ENV['HOST'];
-    $smtpsecure = $_ENV['SMTPSECURE'];
-    $port = $_ENV['PORT'];
+    $username = $_ENV['USERNAME_DEV'];
+    $password = $_ENV['PASSWORD_DEV'];
+    $host = $_ENV['HOST_DEV'];
+    $smtpsecure = $_ENV['SMTPSECURE_DEV'];
+    $port = $_ENV['PORT_DEV'];
     
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
     // $mail->Host       = 'mail.tuempresa.us';                     //Set the SMTP server to send through
-    $mail->Host       = $port;                     //Set the SMTP server to send through
+    $mail->Host       = $host;                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     // $mail->Username   = 'info@tuempresa.us';                     //SMTP username
     $mail->Username   = $username;                     //SMTP username
@@ -77,27 +74,43 @@ try {
         $mail->AddAttachment($file_tmp_pass, $file_name_pass);
     }
   
+    $cantidad_socios = intval($_POST['cantidad_socios']);
+    $socios_arr = array();
+
+
+    for($i=1; $i<$cantidad_socios; $i++) {
+
+        array_push($socios_arr, $_POST['socios-'.$i]);
+    }
+
+    // Mensaje de socios.
+    $countPartner = count($socios_arr);
+    for ($i=0; $i < $countPartner; $i++) {
+
+        $messagePartner = 'Socios: \n Nombre:'.$socios_arr[$i].'\n';
+    }
+    // $messagePartner = '';
     //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->isHTML(true);   //Set email format to HTML
+
+
                 $message = '
     
                 <h1>Información del cliente</h1>
 
                 <ul>
                     <li>Primer Nombre: '. $firstName . '</li>
-                    <li>Segundo Nombre: '. $secondName . '</li>
                     <li>Apellidos:'. $lastName . '</li>
                     <li>Correo electrónico: '. $email . '</li>
                     <li>Nombre de empresa 1: '. $nombre1 . '</li>
                     <li>Nombre de empresa 2: '. $nombre2 . '</li>
                     <li>Nombre de empresa 3: '. $nombre3 . '</li>
-                    <li>Rama actividad: '. $rama .'</li>
                     <li>Forma de pago: '. $pagos .'</li>    
                 </ul>  
             ';
 
                 $mail->Subject = 'Tu Empresa US';
-                $mail->Body    = $message;
+                $mail->Body    = $message.'/n'.$messagePartner;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                 $mail->send();
