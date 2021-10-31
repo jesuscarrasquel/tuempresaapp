@@ -21,9 +21,12 @@ $dotenv->load();
     $lastName =  $_POST['lastName'];
     $email =  $_POST['email'];
     $pagos =  $_POST['pagos'];
+
     $nombre1 =  $_POST['firstCompanyName'];
     $nombre2 =  $_POST['secondCompanyName'];
     $nombre3 =  $_POST['thirdCompanyName'];
+    $plan =  $_POST['plan'];
+    $actividad =  $_POST['actividad'];
     $file_tmp = $_FILES['selfie']['tmp_name'];
     $file_name = $_FILES['selfie']['name'];
     $type = $_POST['type'];
