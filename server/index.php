@@ -27,8 +27,8 @@ $dotenv->load();
     $nombre3 =  $_POST['thirdCompanyName'];
     $plan =  $_POST['plan'];
     $actividad =  $_POST['actividad'];
-    $file_tmp = $_FILES['selfie']['tmp_name'];
-    $file_name = $_FILES['selfie']['name'];
+    // $file_tmp = $_FILES['selfie']['tmp_name'];
+    // $file_name = $_FILES['selfie']['name'];
     $type = $_POST['type'];
 
     echo json_encode($_POST);
@@ -46,7 +46,7 @@ try {
     $port = $_ENV['PORT_DEV'];
     
     $mail->SMTPDebug = 0;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
+    $mail->IsSMTP();                                            //Send using SMTP
     // $mail->Host       = 'mail.tuempresa.us';                     //Set the SMTP server to send through
     $mail->Host       = $host;                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -66,7 +66,7 @@ try {
     // $mail->addBCC('bcc@example.com');
 
     //Attachments
-    $mail->AddAttachment($file_tmp, $file_name);
+    // $mail->AddAttachment($file_tmp, $file_name);
 
     $cantidad_pass = intval($_POST['cantidad_pass']);
 
@@ -76,35 +76,54 @@ try {
         $file_name_pass = $_FILES['passport-'.$i]['name'];
         $mail->AddAttachment($file_tmp_pass, $file_name_pass);
     }
+
+    $cantidad_selfie = intval($_POST['cantidad_selfie']);
+
+    for($i=0; $i<$cantidad_selfie; $i++) {
+
+        $file_tmp_selfie = $_FILES['selfie-'.$i]['tmp_name'];
+        $file_name_selfie = $_FILES['selfie-'.$i]['name'];
+        $mail->AddAttachment($file_tmp_selfie, $file_name_selfie);
+    }
   
     $cantidad_socios = intval($_POST['cantidad_socios']);
-    $socios_arr = array();
+    $sociosFirstNameArr = array();
+    $sociosLastNameArr = array();
+    $sociosEmailArr = array();
 
 
     for($i=1; $i<$cantidad_socios; $i++) {
 
-        array_push($socios_arr, $_POST['socios-'.$i]);
+        array_push($sociosFirstNameArr, $_POST['sociosFirstName-'.$i]);
+        array_push($sociosLastNameArr, $_POST['sociosLastName-'.$i]);
+        array_push($sociosEmailArr, $_POST['sociosEmail-'.$i]);
     }
 
     // Mensaje de socios.
-    $countPartner = count($socios_arr);
-    for ($i=0; $i < $countPartner; $i++) {
+    $countPartner = count($sociosFirstNameArr);
+    $messagePartner = '
+                        <li>Primer Nombre socio 1: '. $firstName . '</li>
+                        <li>Apellidos socio 1:'. $lastName . '</li>
+                        <li>Correo electrónico socio 1: '. $email . '</li>
+    ';
 
-        $messagePartner = 'Socios: \n Nombre:'.$socios_arr[$i].'\n';
-    }
-    // $messagePartner = '';
+    foreach ($sociosFirstNameArr as $key => $value) {
+
+        $messagePartner .= '<li>Primer nombre socio '. $key+2 .': '.$value.'</li>';
+    };
+
+    // <li>Apellidos socio '. $i+2 .': '.$sociosLastNameArr[$i].'</li>
+    // <li>Email socio '. $i+2 .': '.$sociosEmailArr[$i].'</li>
+
     //Content
     $mail->isHTML(true);   //Set email format to HTML
 
 
-                    $message = '
-                    
-                    <h1>Información del cliente</h1>
 
-                    <ul>
-                        <li>Primer Nombre: '. $firstName . '</li>
-                        <li>Apellidos:'. $lastName . '</li>
-                        <li>Correo electrónico: '. $email . '</li>
+                    $message = '
+                        <h1>Información del cliente</h1>
+                    <ul>'.
+                        $messagePartner .'
                         <li>Nombre de empresa 1: '. $nombre1 . '</li>
                         <li>Nombre de empresa 2: '. $nombre2 . '</li>
                         <li>Nombre de empresa 3: '. $nombre3 . '</li>
@@ -115,10 +134,15 @@ try {
                 ';
 
                 $mail->Subject = 'Tu Empresa US';
-                $mail->Body    = $message.'/n'.$messagePartner;
+                $mail->Body    = $message;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 $mail->send();
                 echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+
+// <li>Primer Nombre: '. $firstName . '</li>
+// <li>Apellidos:'. $lastName . '</li>
+// <li>Correo electrónico: '. $email . '</li>

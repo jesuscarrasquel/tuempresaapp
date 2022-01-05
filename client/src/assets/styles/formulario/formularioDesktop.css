@@ -76,4 +76,14 @@
     .danger {
         color: red;
     }
+
+    #formulario .form__divPartner {
+        flex: 0 0 25%;
+        max-width: 25%;
+
+    }
+
+    /* .newPartner { 
+        display: flex;
+    } */
 }

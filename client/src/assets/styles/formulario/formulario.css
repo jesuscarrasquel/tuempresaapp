@@ -13,6 +13,8 @@
 #formulario i {
     font-size: 4rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 #formulario form .header-formulario .company-name {
@@ -166,4 +168,8 @@
 #formulario .alert-icon {
     width: 50px;
 
+}
+
+#formulario .newPartner {
+    padding: 0px;
 }

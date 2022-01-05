@@ -35,22 +35,32 @@ const Formulario = () => {
     f.append("pagos", pagos);
 
     for(const item in passport){
-      f.append(`passport-${item}`, passport[item])
+      f.append(`passport-${item}`, passport[item]);
     }
 
     const pass_length = passport.length;
     f.append('cantidad_pass', pass_length);
-    f.append("selfie", selfie[0]);
+
+    for(const item in selfie){
+      f.append(`selfie-${item}`, selfie[item]);
+    }
+
+    const selfie_length = selfie.length;
+    f.append('cantidad_selfie', selfie_length);
     f.append("type", type); 
     
-    let arrSocios = []
+    let arrSocios = [];
     for(let i=1; i < socios; i++) {
       
       const partnerFirstName = document.getElementById(`firstName__${i}`).value
-      f.append(`socios-${i}`, partnerFirstName)
-      arrSocios.push(partnerFirstName)
-      console.log(partnerFirstName, "partner")
-      
+      f.append(`sociosFirstName-${i}`, partnerFirstName)
+
+      const partnerLastName = document.getElementById(`lastName__${i}`).value
+      f.append(`sociosLastName-${i}`, partnerLastName)
+
+      const partnerEmail = document.getElementById(`email__${i}`).value
+      f.append(`sociosEmail-${i}`, partnerEmail)
+    
     }
 
     const socios_length = socios;
@@ -66,8 +76,6 @@ const Formulario = () => {
     const res = await sendEmail(f);
 
     console.log(res)
-
-
 
   };
 
@@ -110,13 +118,19 @@ const [socios, setSocios] = useState(1);
 const agregarSocio = () => {
   setSocios(socios + 1 );
   const newPartnerFirstName = document.getElementById("newPartner__firstName") 
-  const newPartnerSecondName = document.getElementById("newPartner__secondName") 
+  const newPartnerLastName = document.getElementById("newPartner__secondName") 
   const newPartnerEmail = document.getElementById("newPartner__email") 
   // const content = `<div className='form__div'> <input {${{...register('firstName', { required: true })}}} type='text' className='form__input' placeholder='' id='firstName' onBlur=${{handleInput}} onClick=${ () => setState({...state, firstName: true}) } /> <label for='firstName' className={${classes.focusInputfirstName}} onClick={${() => setState({...state, firstName: true})}}>Primer nombre*</label> <div className='validacion-contenedor'> {${errors.firstName && <span className='danger'>Este campo es requerido</span>}} </div> </div>`
   // newPartnerFirstName.innerHTML = content
   console.log(socios, "socios")
 
+  const divParentPartner = document.createElement("div")
+  divParentPartner.setAttribute("class", "row")
+  divParentPartner.id = "parent-div"
+
   // Primer Nombre
+  const divFirstNameParent = document.createElement("div")
+  divFirstNameParent.setAttribute("class", "col-12 col-md-3")
 
   const divFirstName = document.createElement("div")
   divFirstName.setAttribute("class", "form__div")
@@ -127,57 +141,60 @@ const agregarSocio = () => {
   inputFirstName.name = `firstName__${socios}`
   
   const labelFirstName = document.createElement("label")
-  labelFirstName.setAttribute("class", `${classes.focusInputfirstName}`)
+  labelFirstName.setAttribute("class", `form__label active`)
   labelFirstName.setAttribute("for", `firstName__${socios}`)
   labelFirstName.textContent = "Primer Nombre"
   
+  divFirstNameParent.appendChild(divFirstName)
   divFirstName.appendChild(inputFirstName)
-  newPartnerFirstName.appendChild(divFirstName)
   divFirstName.appendChild(labelFirstName)
+  divParentPartner.appendChild(divFirstNameParent)
 
-  // setState({
-  //   ...state,
-  //   sociosState: [...socios, ]
-  // })
 
-  // document.addEventListener('onblur', handleInput)
+  // Apellidos
+  const divLastNameParent = document.createElement("div")
+  divLastNameParent.setAttribute("class", "col-12 col-md-3")
+  const divLastName = document.createElement("div")
+  divLastName.setAttribute("class", "form__div")
 
-  // Segundo Nombre
-  // const divSecondName = document.createElement("div")
-  // divSecondName.setAttribute("class", "form__div")
+  const inputLastName = document.createElement("input")
+  inputLastName.setAttribute("class", "form__input")
+  inputLastName.id = `lastName__${socios}`
+  inputLastName.name = `lastName__${socios}`
 
-  // const inputSecondName = document.createElement("input")
-  // inputSecondName.setAttribute("class", "form__input")
-  // inputSecondName.setAttribute("onblur", handleInput)
-  // inputSecondName.id = "firstName__second"
+  const labelLastName = document.createElement("label")
+  labelLastName.setAttribute("class", `form__label active`)
+  labelLastName.setAttribute("for", `lastName__${socios}`)
+  labelLastName.textContent = "Apellidos"
 
-  // const labelSecondName = document.createElement("label")
-  // labelSecondName.setAttribute("class", `${classes.focusInputfirstName}`)
-  // labelSecondName.setAttribute("for", `firstName__second`)
-  // labelSecondName.textContent = "Segundo Nombre"
-
-  // divSecondName.appendChild(inputSecondName)
-  // newPartnerSecondName.appendChild(divSecondName)
-  // divSecondName.appendChild(labelSecondName)
+  divLastNameParent.appendChild(divLastName)
+  divLastName.appendChild(inputLastName)
+  divLastName.appendChild(labelLastName)
+  divParentPartner.appendChild(divLastNameParent)
 
   // Correo
-  // const divEmail = document.createElement("div")
-  // divEmail.setAttribute("class", "form__div")
+  const divEmailParent = document.createElement("div")
+  divEmailParent.setAttribute("class", "col-12 col-md-3")
 
-  // const inputEmail = document.createElement("input")
-  // inputEmail.setAttribute("class", "form__input")
-  // inputEmail.setAttribute("onblur", handleInput)
-  // inputEmail.id = "firstName__second"
+  const divEmail = document.createElement("div")
+  divEmail.setAttribute("class", "form__div")
 
-  // const labelEmail = document.createElement("label")
-  // labelEmail.setAttribute("class", `${classes.focusInputfirstName}`)
-  // labelEmail.setAttribute("for", `firstName__second`)
-  // labelEmail.textContent = "Correo electrónico"
+  const inputEmail = document.createElement("input")
+  inputEmail.setAttribute("class", "form__input")
+  inputEmail.id = `email__${socios}`
+  inputEmail.name = `email__${socios}`
 
-  // divEmail.appendChild(inputEmail)
-  // newPartnerEmail.appendChild(divEmail)
-  // divEmail.appendChild(labelEmail)
+  const labelEmail = document.createElement("label")
+  labelEmail.setAttribute("class", `form__label active`)
+  labelEmail.setAttribute("for", `email__${socios}`)
+  labelEmail.textContent = "Correo electrónico"
 
+  divEmailParent.appendChild(divEmail)
+  divEmail.appendChild(inputEmail)
+  divEmail.appendChild(labelEmail)
+  divParentPartner.appendChild(divEmailParent)
+
+  newPartnerFirstName.appendChild(divParentPartner)
 
 }
 
@@ -291,29 +308,24 @@ const agregarSocio = () => {
               {/* Agregar socio */}
 
                 <Row>
-                    <Col md="3" xs="12">
+                    <Col md="12" xs="12">
                     
-                      <div className="newPartner" id="newPartner__firstName"></div> 
+                      <Col className="newPartner" id="newPartner__firstName">
+                        
+                        
+                      </Col> 
 
                     </Col>
-                    <Col md="3" xs="12">
-                    
-                      <div className="newPartner" id="newPartner__secondName"></div> 
-
-                    </Col>
-                    <Col md="3" xs="12">
-                    
-                      <div className="newPartner" id="newPartner__email"></div> 
-
-                    </Col>
+           
                 </Row>
 
                 <Row className="mb-4 input-form">
 
-                  <Col md="3" xs="12">
+                  <Col md="3" xs="12" >
 
-                    <i class="fas fa-plus-circle" onClick={agregarSocio}></i>
-                  
+                    <i class="fas fa-plus-circle d-flex" onClick={agregarSocio}><h2 className="ml-3">Agregar socio</h2></i>
+                    
+                    
                   </Col>
             
                   <hr />
@@ -337,7 +349,7 @@ const agregarSocio = () => {
                       {...register("passport", { required: true })}
                       type="file"
                       multiple
-                      accept="image/png, .jpeg, .jpg, image/gif"
+                      accept="image/png, .jpeg, .jpg, image/gif, .pdf"
                     />
 
                       <div className="validacion-contenedor-file">
@@ -367,7 +379,8 @@ const agregarSocio = () => {
                     <input
                       {...register("selfie", { required: true })}
                       type="file"
-                      accept="image/png, .jpeg, .jpg, image/gif"
+                      multiple
+                      accept="image/png, .jpeg, .jpg, image/gif, .pdf"
                     />
                     <br />
                     <div className="validacion-contenedor-file">
