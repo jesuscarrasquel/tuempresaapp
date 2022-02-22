@@ -1,89 +1,11 @@
 @media screen and (min-width: 1024px) {
-    #formulario {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    #formulario .title {
-        /* padding-bottom: 2rem; */
-    }
-
-    #formulario .contenido-formulario {
-        margin-top: 4rem;
-    }
-
-    #formulario form {
-        width: 70%;
-    }
-    
-    #formulario input {
-        width: 200px;
-        height: 30px;
-        outline: none;
-        font-size: 1.6rem;
-        border-radius: 5px;
-        
-    }
-        
-    #formulario input[type="file"] {
-        width: 500px;
-        margin-bottom: 5px;
-    }
-
-    #formulario .validacion-contenedor {
-        position: absolute;
-        top: 50px;
-    }
-    
-    #formulario .validacion-contenedor-file {
-        position: absolute;
-        top: 30px;
-    }
-    
-    #passport-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    #formulario .input-form {
-        flex-direction: column;
-    }
-    
-    #formulario .plus-icon {
-        padding-top: 10px;
-        font-size: 25px;
-    }
-    
-    #formulario input[type="submit"] {
-        font-size: 15px;
-        padding: 2rem;
-        width: 150px;
-        height: 30px;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-    }
-    
-    #formulario p {
-        font-size: 2rem;
-    }
-    
-    .danger {
-        color: red;
-    }
-
-    #formulario .form__divPartner {
-        flex: 0 0 25%;
-        max-width: 25%;
-
-    }
-
-    /* .newPartner { 
-        display: flex;
-    } */
+  .bodyFormulario {
+    display: flex;
+    flex-direction: column;
+  }
+  .formItemsContainer {
+    display: flex;
+  }
+  .formItem {
+  }
 }
