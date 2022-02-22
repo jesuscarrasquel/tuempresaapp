@@ -2,13 +2,83 @@ import "./formulario.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import { Upload } from "@mui/icons-material";
+import { sendEmail } from "../../api/peticiones";
 export default function Formulario() {
   const [successSent, setSuccessSent] = useState(false);
+  const onSubmit = async (data) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      firstCompanyName,
+      secondCompanyName,
+      thirdCompanyName,
+      passport,
+      plan,
+      actividad,
+      selfie,
+      pagos,
+    } = data;
+    const type = "formulario";
+
+    console.log(data, "data");
+    const f = new FormData();
+    f.append("firstName", firstName);
+    f.append("lastName", lastName);
+    f.append("email", email);
+    f.append("firstCompanyName", firstCompanyName);
+    f.append("secondCompanyName", secondCompanyName);
+    f.append("thirdCompanyName", thirdCompanyName);
+    f.append("plan", plan);
+    f.append("actividad", actividad);
+    f.append("pagos", pagos);
+
+    for (const item in passport) {
+      f.append(`passport-${item}`, passport[item]);
+    }
+
+    const pass_length = passport.length;
+    f.append("cantidad_pass", pass_length);
+
+    for (const item in selfie) {
+      f.append(`selfie-${item}`, selfie[item]);
+    }
+
+    const selfie_length = selfie.length;
+    f.append("cantidad_selfie", selfie_length);
+    f.append("type", type);
+
+    // let arrSocios = [];
+    // for(let i=1; i < socios; i++) {
+
+    //   const partnerFirstName = document.getElementById(`firstName__${i}`).value
+    //   f.append(`sociosFirstName-${i}`, partnerFirstName)
+
+    //   const partnerLastName = document.getElementById(`lastName__${i}`).value
+    //   f.append(`sociosLastName-${i}`, partnerLastName)
+
+    //   const partnerEmail = document.getElementById(`email__${i}`).value
+    //   f.append(`sociosEmail-${i}`, partnerEmail)
+
+    // }
+
+    // const socios_length = socios;
+    // f.append('cantidad_socios', socios_length);
+
+    // const boton = document.getElementById("boton-enviar");
+    // boton.disabled = true;
+
+    // setSuccessState(true)
+
+    const res = await sendEmail(f);
+
+    console.log(res);
+  };
   return (
     <div className="formulario">
       <Formik
         initialValues={{
-          username: "",
+          firstName: "",
           lastName: "",
           email: "",
           passport: "",
@@ -18,63 +88,64 @@ export default function Formulario() {
           thirdCompanyName: "",
           plan: "",
           actividad: "",
-          metodoPago: "",
+          pagos: "",
         }}
-        validate={(values) => {
-          let error = {};
-          //   Validacion nombre
-          if (!values.username) {
-            error.username = "Por favor ingresa un nombre";
-          }
-          //   Validacion apellido
-          if (!values.lastName) {
-            error.lastName = "Por favor ingresa tus apellidos";
-          }
-          //   Validacion correo
-          if (!values.email) {
-            error.email = "Por favor ingresa un correo";
-          }
-          //   Validacion pasaporte
-          if (!values.passport) {
-            error.passport = "Por favor ingresa tu pasaporte";
-          }
+        // validate={(values) => {
+        //   let error = {};
+        //   //   Validacion nombre
+        //   if (!values.firstName) {
+        //     error.firstName = "Por favor ingresa un nombre";
+        //   }
+        //   //   Validacion apellido
+        //   if (!values.lastName) {
+        //     error.lastName = "Por favor ingresa tus apellidos";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.email) {
+        //     error.email = "Por favor ingresa un correo";
+        //   }
+        //   //   Validacion pasaporte
+        //   if (!values.passport) {
+        //     error.passport = "Por favor ingresa tu pasaporte";
+        //   }
 
-          //   Validacion correo
-          if (!values.selfie) {
-            error.selfie = "Por favor ingresa una foto tipo selfie";
-          }
-          //   Validacion correo
-          if (!values.firstCompanyName) {
-            error.firstCompanyName =
-              "Por favor ingresa un nombre para tu empresa";
-          }
-          //   Validacion correo
-          if (!values.secondCompanyName) {
-            error.secondCompanyName =
-              "Por favor ingresa un nombre para tu empresa";
-          }
-          //   Validacion correo
-          if (!values.thirdCompanyName) {
-            error.thirdCompanyName =
-              "Por favor ingresa un nombre para tu empresa";
-          }
-          //   Validacion correo
-          if (!values.plan) {
-            error.plan = "Por favor selecciona una opción";
-          }
-          //   Validacion correo
-          if (!values.actividad) {
-            error.actividad = "Por favor selecciona una opción";
-          }
-          //   Validacion selfie
-          if (!values.metodoPago) {
-            error.metodoPago = "Por favor selecciona una opción";
-          }
+        //   //   Validacion correo
+        //   if (!values.selfie) {
+        //     error.selfie = "Por favor ingresa una foto tipo selfie";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.firstCompanyName) {
+        //     error.firstCompanyName =
+        //       "Por favor ingresa un nombre para tu empresa";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.secondCompanyName) {
+        //     error.secondCompanyName =
+        //       "Por favor ingresa un nombre para tu empresa";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.thirdCompanyName) {
+        //     error.thirdCompanyName =
+        //       "Por favor ingresa un nombre para tu empresa";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.plan) {
+        //     error.plan = "Por favor selecciona una opción";
+        //   }
+        //   //   Validacion correo
+        //   if (!values.actividad) {
+        //     error.actividad = "Por favor selecciona una opción";
+        //   }
+        //   //   Validacion selfie
+        //   if (!values.metodoPago) {
+        //     error.metodoPago = "Por favor selecciona una opción";
+        //   }
 
-          return error;
-        }}
+        //   return error;
+        // }}
         onSubmit={(values, { resetForm }) => {
           // dispatch(loginUserAction(values))
+          onSubmit(values);
           console.log("valores enviado");
           resetForm();
           setSuccessSent(true);
@@ -94,14 +165,14 @@ export default function Formulario() {
                   <label htmlFor="">Primer Nombre</label>
                   <Field
                     type="text"
-                    name="username"
-                    id="username"
+                    name="firstName"
+                    id="firstName"
                     placeholder="Escribe tu nombre aquí..."
                   />
                   <ErrorMessage
-                    name="username"
+                    name="firstName"
                     component={() => (
-                      <div className="error">{errors.username}</div>
+                      <div className="error">{errors.firstName}</div>
                     )}
                   />
                 </div>
@@ -251,7 +322,7 @@ export default function Formulario() {
                 </div>
                 <div className="formulario__input">
                   <label htmlFor="">Selecciona un método de pago</label>
-                  <Field name="metodoPago" as="select">
+                  <Field name="pagos" as="select">
                     <option value="Seleccionar">Seleccionar</option>
                     <option value="WireTransfer">WireTransfer</option>
                     <option value="Zelle">Zelle</option>
@@ -260,9 +331,9 @@ export default function Formulario() {
                     <option value="Otro">Otro</option>
                   </Field>
                   <ErrorMessage
-                    name="metodoPago"
+                    name="pagos"
                     component={() => (
-                      <div className="error">{errors.metodoPago}</div>
+                      <div className="error">{errors.pagos}</div>
                     )}
                   />
                 </div>
