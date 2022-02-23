@@ -1,8 +1,9 @@
 import "./formulario.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import { useState } from "react";
-import { Upload } from "@mui/icons-material";
+import { Upload, DoneOutline, Clear, DeleteOutline } from "@mui/icons-material";
 import { sendEmail } from "../../api/peticiones";
+import Thumb from "../../components/Thumb";
 export default function Formulario() {
   const [successSent, setSuccessSent] = useState(false);
   const onSubmit = async (data) => {
@@ -23,52 +24,25 @@ export default function Formulario() {
 
     console.log(data, "data");
     const f = new FormData();
-    f.append("firstName", firstName);
-    f.append("lastName", lastName);
-    f.append("email", email);
+    let arrSocios = data.partners;
+    let cantidadSocios = arrSocios.length;
+    for (let i = 0; i < arrSocios.length; i++) {
+      console.log(arrSocios[i].firstName);
+      f.append("firstName" + i, arrSocios[i].firstName);
+      f.append("lastName" + i, arrSocios[i].lastName);
+      f.append("email" + i, arrSocios[i].email);
+      f.append("passport" + i, arrSocios[i].passport);
+      f.append("selfie" + i, arrSocios[i].selfie);
+    }
+
+    f.append("cantidadSocios", cantidadSocios);
+
     f.append("firstCompanyName", firstCompanyName);
     f.append("secondCompanyName", secondCompanyName);
     f.append("thirdCompanyName", thirdCompanyName);
     f.append("plan", plan);
     f.append("actividad", actividad);
     f.append("pagos", pagos);
-
-    for (const item in passport) {
-      f.append(`passport-${item}`, passport[item]);
-    }
-
-    const pass_length = passport.length;
-    f.append("cantidad_pass", pass_length);
-
-    for (const item in selfie) {
-      f.append(`selfie-${item}`, selfie[item]);
-    }
-
-    const selfie_length = selfie.length;
-    f.append("cantidad_selfie", selfie_length);
-    f.append("type", type);
-
-    // let arrSocios = [];
-    // for(let i=1; i < socios; i++) {
-
-    //   const partnerFirstName = document.getElementById(`firstName__${i}`).value
-    //   f.append(`sociosFirstName-${i}`, partnerFirstName)
-
-    //   const partnerLastName = document.getElementById(`lastName__${i}`).value
-    //   f.append(`sociosLastName-${i}`, partnerLastName)
-
-    //   const partnerEmail = document.getElementById(`email__${i}`).value
-    //   f.append(`sociosEmail-${i}`, partnerEmail)
-
-    // }
-
-    // const socios_length = socios;
-    // f.append('cantidad_socios', socios_length);
-
-    // const boton = document.getElementById("boton-enviar");
-    // boton.disabled = true;
-
-    // setSuccessState(true)
 
     const res = await sendEmail(f);
 
@@ -78,11 +52,16 @@ export default function Formulario() {
     <div className="formulario">
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          passport: "",
-          selfie: "",
+          partners: [
+            {
+              firstName: "",
+              lastName: "",
+              email: "",
+              passport: undefined,
+              selfie: undefined,
+            },
+          ],
+
           firstCompanyName: "",
           secondCompanyName: "",
           thirdCompanyName: "",
@@ -90,68 +69,71 @@ export default function Formulario() {
           actividad: "",
           pagos: "",
         }}
-        // validate={(values) => {
-        //   let error = {};
-        //   //   Validacion nombre
-        //   if (!values.firstName) {
-        //     error.firstName = "Por favor ingresa un nombre";
-        //   }
-        //   //   Validacion apellido
-        //   if (!values.lastName) {
-        //     error.lastName = "Por favor ingresa tus apellidos";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.email) {
-        //     error.email = "Por favor ingresa un correo";
-        //   }
-        //   //   Validacion pasaporte
-        //   if (!values.passport) {
-        //     error.passport = "Por favor ingresa tu pasaporte";
-        //   }
+        validate={(values) => {
+          let error = {};
+          console.log(values);
+          //   Validacion nombre
+          for (let i = 0; i < values.partners; i++) {
+            if (!values.partners[i].firstName) {
+              error.partners.firstName = "Por favor ingresa un nombre";
+            }
+            //   Validacion apellido
+            // if (!values.partners[i].lastName) {
+            //   error.lastName = "Por favor ingresa tus apellidos";
+            // }
+            // //   Validacion correo
+            // if (!values.partners[i].email) {
+            //   error.email = "Por favor ingresa un correo";
+            // }
+            // //   Validacion pasaporte
+            // if (!values.partners[i].passport) {
+            //   error.passport = "Por favor ingresa tu pasaporte";
+            // }
 
-        //   //   Validacion correo
-        //   if (!values.selfie) {
-        //     error.selfie = "Por favor ingresa una foto tipo selfie";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.firstCompanyName) {
-        //     error.firstCompanyName =
-        //       "Por favor ingresa un nombre para tu empresa";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.secondCompanyName) {
-        //     error.secondCompanyName =
-        //       "Por favor ingresa un nombre para tu empresa";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.thirdCompanyName) {
-        //     error.thirdCompanyName =
-        //       "Por favor ingresa un nombre para tu empresa";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.plan) {
-        //     error.plan = "Por favor selecciona una opción";
-        //   }
-        //   //   Validacion correo
-        //   if (!values.actividad) {
-        //     error.actividad = "Por favor selecciona una opción";
-        //   }
-        //   //   Validacion selfie
-        //   if (!values.metodoPago) {
-        //     error.metodoPago = "Por favor selecciona una opción";
-        //   }
+            // //   Validacion correo
+            // if (!values.partners[i].selfie) {
+            //   error.selfie = "Por favor ingresa una foto tipo selfie";
+            // }
+          }
+          //   Validacion correo
+          if (!values.firstCompanyName) {
+            error.firstCompanyName =
+              "Por favor ingresa un nombre para tu empresa";
+          }
+          //   Validacion correo
+          if (!values.secondCompanyName) {
+            error.secondCompanyName =
+              "Por favor ingresa un nombre para tu empresa";
+          }
+          //   Validacion correo
+          if (!values.thirdCompanyName) {
+            error.thirdCompanyName =
+              "Por favor ingresa un nombre para tu empresa";
+          }
+          //   Validacion correo
+          if (!values.plan) {
+            error.plan = "Por favor selecciona una opción";
+          }
+          //   Validacion correo
+          if (!values.actividad) {
+            error.actividad = "Por favor selecciona una opción";
+          }
+          //   Validacion selfie
+          if (!values.pagos) {
+            error.pagos = "Por favor selecciona una opción";
+          }
 
-        //   return error;
-        // }}
+          return error;
+        }}
         onSubmit={(values, { resetForm }) => {
           // dispatch(loginUserAction(values))
           onSubmit(values);
-          console.log("valores enviado");
           resetForm();
           setSuccessSent(true);
+          setTimeout(() => setSuccessSent(false), 5000);
         }}
       >
-        {({ errors }) => (
+        {({ errors, isSubmitting, values, setFieldValue }) => (
           <Form>
             <div className="header__formulario">
               <h2>
@@ -160,84 +142,157 @@ export default function Formulario() {
               </h2>
             </div>
             <div className="wrapper__formulario">
-              <div className="basic__info">
-                <div className="formulario__input">
-                  <label htmlFor="">Primer Nombre</label>
-                  <Field
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder="Escribe tu nombre aquí..."
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component={() => (
-                      <div className="error">{errors.firstName}</div>
-                    )}
-                  />
-                </div>
-                <div className="formulario__input">
-                  <label htmlFor="">Apellidos</label>
-                  <Field
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="Escribe tu apellido aquí..."
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component={() => (
-                      <div className="error">{errors.lastName}</div>
-                    )}
-                  />
-                </div>
-                <div className="formulario__input">
-                  <label htmlFor="">Correo electrónico</label>
-                  <Field
-                    type="text"
-                    name="email"
-                    id="email"
-                    placeholder="Escribe tu correo aquí..."
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component={() => (
-                      <div className="error">{errors.email}</div>
-                    )}
-                  />
-                </div>
-              </div>
-              <div className="file__container">
-                <div className="formulario__file">
-                  <span>Fotos del pasaporte de los solicitantes.</span>
-                  <label htmlFor="passport">
-                    <Upload className="iconFile" />
-                  </label>
-                  <input type="file" name="passport" id="passport" multiple />
-                  <ErrorMessage
-                    name="passport"
-                    component={() => (
-                      <div className="error">{errors.passport}</div>
-                    )}
-                  />
-                </div>
-                <div className="formulario__file">
-                  <span>
-                    Foto tipo selfie de los socitantes mostrando el pasaporte.
-                  </span>
+              <FieldArray name="partners">
+                {({ insert, remove, push }) => (
+                  <div>
+                    {values.partners.length > 0 &&
+                      values.partners.map((partner, index) => (
+                        <div key={index} className="array__info">
+                          <div className="basic__info">
+                            <div className="formulario__input">
+                              <label htmlFor={`partners.${index}.firstName`}>
+                                Primer Nombre
+                              </label>
+                              <Field
+                                type="text"
+                                name={`partners.${index}.firstName`}
+                                id={`partners.${index}.firstName`}
+                                placeholder="Escribe tu nombre aquí..."
+                              />
+                              <ErrorMessage
+                                name={`partners.${index}.firstName`}
+                                component={() => (
+                                  <div className="error">
+                                    {errors.partners.firstName}
+                                  </div>
+                                )}
+                              />
+                            </div>
+                            <div className="formulario__input">
+                              <label htmlFor="">Apellidos</label>
+                              <Field
+                                type="text"
+                                name={`partners.${index}.lastName`}
+                                id={`partners.${index}.lastName`}
+                                placeholder="Escribe tu apellido aquí..."
+                              />
+                              <ErrorMessage
+                                name={`partners.${index}.lastName`}
+                                component={() => (
+                                  <div className="error">
+                                    {errors.partners.index.lastName}
+                                  </div>
+                                )}
+                              />
+                            </div>
+                            <div className="formulario__input">
+                              <label htmlFor="">Correo electrónico</label>
+                              <Field
+                                type="text"
+                                name={`partners.${index}.email`}
+                                id={`partners.${index}.email`}
+                                placeholder="Escribe tu correo aquí..."
+                              />
+                              <ErrorMessage
+                                name={`partners.${index}.email`}
+                                component={() => (
+                                  <div className="error">
+                                    {errors.partners.index.email}
+                                  </div>
+                                )}
+                              />
+                            </div>
+                          </div>
+                          <div className="file__container">
+                            <div className="formulario__file">
+                              <span>Fotos del pasaporte.</span>
+                              <label htmlFor={`partners.${index}.passport`}>
+                                <Upload className="iconFile" />
+                              </label>
+                              <input
+                                type="file"
+                                name={`partners.${index}.passport`}
+                                id={`partners.${index}.passport`}
+                                onChange={(event) => {
+                                  setFieldValue(
+                                    `partners.${index}.passport`,
+                                    event.currentTarget.files[0]
+                                  );
+                                }}
+                              />
+                              <Thumb file={values.partners[index].passport} />
+                              <ErrorMessage
+                                name={`partners.${index}.passport`}
+                                component={() => (
+                                  <div className="error">
+                                    {errors.partners.passport}
+                                  </div>
+                                )}
+                              />
+                            </div>
+                            <div className="formulario__file">
+                              <span>
+                                Foto tipo selfie del solicitante mostrando el
+                                pasaporte.
+                              </span>
 
-                  <label htmlFor="selfie">
-                    <Upload className="iconFile" />
-                  </label>
-                  <input type="file" name="selfie" id="selfie" multiple />
-                  <ErrorMessage
-                    name="selfie"
-                    component={() => (
-                      <div className="error">{errors.selfie}</div>
-                    )}
-                  />
-                </div>
-              </div>
+                              <label htmlFor={`partners.${index}.selfie`}>
+                                <Upload className="iconFile" />
+                              </label>
+                              <input
+                                type="file"
+                                name={`partners.${index}.selfie`}
+                                id={`partners.${index}.selfie`}
+                                onChange={(event) => {
+                                  setFieldValue(
+                                    `partners.${index}.selfie`,
+                                    event.currentTarget.files[0]
+                                  );
+                                }}
+                              />
+                              <Thumb file={values.partners[index].selfie} />
+                              <ErrorMessage
+                                name={`partners.${index}.selfie`}
+                                component={() => (
+                                  <div className="error">
+                                    {errors.partners.index.selfie}
+                                  </div>
+                                )}
+                              />
+                            </div>
+                            <div className="delete__container">
+                              <button
+                                type="button"
+                                className="deleteButton"
+                                onClick={() => remove(index)}
+                              >
+                                <DeleteOutline className="deleteIcon" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    <div className="button__formulario__container">
+                      <button
+                        type="button"
+                        className="secondary"
+                        onClick={() =>
+                          push({
+                            firstName: "",
+                            lastName: "",
+                            email: "",
+                            passport: undefined,
+                            selfie: undefined,
+                          })
+                        }
+                      >
+                        Agrega un socio
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </FieldArray>
+
               <div className="companyname__container">
                 <div className="title__company">
                   <h3>Proporcionar 3 opciones de nombre para la empresa.</h3>
@@ -339,12 +394,17 @@ export default function Formulario() {
                 </div>
               </div>
               <div className="button__formulario__container">
-                <button>Enviar</button>
+                <button disabled={isSubmitting} type="submit">
+                  Enviar
+                </button>
               </div>
               {successSent && (
-                <p className="exito">
-                  Tu formulario ha sido enviado exitosamente.
-                </p>
+                <div className="success__div">
+                  <DoneOutline className="iconSuccess" />
+                  <span className="exito">
+                    Tu formulario ha sido enviado exitosamente.
+                  </span>
+                </div>
               )}
             </div>
           </Form>

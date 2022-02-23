@@ -4,7 +4,9 @@
 .wrapper__formulario {
   padding: 10px;
 }
-
+form {
+  background-color: #f9f7f4;
+}
 .basic__info {
   display: flex;
   flex-direction: column;
@@ -18,6 +20,13 @@
   /* align-items: center; */
 }
 
+.array__info {
+  border: 1px solid gray;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: relative;
+}
 .formulario__input label {
   margin-right: 20px;
   font-size: 18px;
@@ -29,6 +38,7 @@ select {
   border: 1px solid #dadce0;
   border-radius: 5px;
   padding: 10px;
+  font-size: 18px !important;
 }
 select {
   font-size: 18px !important;
@@ -36,9 +46,47 @@ select {
 
 .error {
   color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.deleteButton {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  width: 30px !important;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 50%;
+}
+.deleteIcon {
+  font-size: 30px !important;
+  color: red;
+}
+.success__div {
+  width: 100%;
+  background-color: rgb(41, 194, 41);
+  padding: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconSuccess {
+  font-size: 30px !important;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  color: white !important;
 }
 .exito {
-  color: rgb(55, 179, 55);
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
 }
 .content__company {
   display: flex;
@@ -87,15 +135,15 @@ input[type="file"] {
   flex-direction: column;
 }
 .title__company {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: gray;
-  font-size: 18px;
+  font-size: 20px;
   /* display: flex;
   justify-content: center; */
 }
 .button__formulario__container button {
   border: none;
-  background-color: darkblue;
+  background-color: #003df0;
   border-radius: 5px;
   font-size: 18px;
   font-weight: 700;
@@ -108,7 +156,7 @@ input[type="file"] {
 
 .header__formulario {
   width: 100%;
-  background-color: darkblue;
+  background-color: #003df0;
   color: white;
   padding: 15px;
   margin-bottom: 20px;
