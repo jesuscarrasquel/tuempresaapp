@@ -162,6 +162,33 @@ input[type="file"] {
   margin-bottom: 20px;
 }
 
+.header__formulario h2 {
+  font-size: 24px;
+  padding-left: 2rem;
+}
+
+.company-name {
+  margin-bottom: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.logo {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 1.5rem;
+}
+
+.company-name {
+  padding-left: 2rem;
+}
+
+.company-name span {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: white;
+}
+
 @media (min-width: 600px) {
   .basic__info {
     display: flex;

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Upload, DoneOutline, Clear, DeleteOutline } from "@mui/icons-material";
 import { sendEmail } from "../../api/peticiones";
 import Thumb from "../../components/Thumb";
+// import Logo from "../assets2/logo-sinfondo2.png";
+import Logo from "../../assets2/logo-sinfondo2.png";
 export default function Formulario() {
   const [successSent, setSuccessSent] = useState(false);
   const onSubmit = async (data) => {
@@ -138,7 +140,7 @@ export default function Formulario() {
             <div className="header__formulario">
               <div className="company-name">
                 <span>Tu Empresa US</span>
-                {/* <img src={Logo} alt="Tu empresa US Logo" className="logo" /> */}
+                <img src={Logo} alt="Tu empresa US Logo" className="logo" />
               </div>
               <h2>
                 Requerimientos para la solicitud de apertura de empresa en los
