@@ -136,6 +136,10 @@ export default function Formulario() {
         {({ errors, isSubmitting, values, setFieldValue }) => (
           <Form>
             <div className="header__formulario">
+              <div className="company-name">
+                <span>Tu Empresa US</span>
+                {/* <img src={Logo} alt="Tu empresa US Logo" className="logo" /> */}
+              </div>
               <h2>
                 Requerimientos para la solicitud de apertura de empresa en los
                 Estados Unidos
