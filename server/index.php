@@ -17,21 +17,7 @@ $dotenv->load();
 
     unset($_POST['METHOD']);
 
-    $firstName =  $_POST['firstName'];
-    $lastName =  $_POST['lastName'];
-    $email =  $_POST['email'];
-    $pagos =  $_POST['pagos'];
-
-    $nombre1 =  $_POST['firstCompanyName'];
-    $nombre2 =  $_POST['secondCompanyName'];
-    $nombre3 =  $_POST['thirdCompanyName'];
-    $plan =  $_POST['plan'];
-    $actividad =  $_POST['actividad'];
-    // $file_tmp = $_FILES['selfie']['tmp_name'];
-    // $file_name = $_FILES['selfie']['name'];
-    $type = $_POST['type'];
-
-    echo json_encode($_POST);
+    // echo json_encode($_POST);
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -65,55 +51,61 @@ try {
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
-    //Attachments
-    // $mail->AddAttachment($file_tmp, $file_name);
-
-    $cantidad_pass = intval($_POST['cantidad_pass']);
-
-    for($i=0; $i<$cantidad_pass; $i++) {
-
-        $file_tmp_pass = $_FILES['passport-'.$i]['tmp_name'];
-        $file_name_pass = $_FILES['passport-'.$i]['name'];
-        $mail->AddAttachment($file_tmp_pass, $file_name_pass);
-    }
-
-    $cantidad_selfie = intval($_POST['cantidad_selfie']);
-
-    for($i=0; $i<$cantidad_selfie; $i++) {
-
-        $file_tmp_selfie = $_FILES['selfie-'.$i]['tmp_name'];
-        $file_name_selfie = $_FILES['selfie-'.$i]['name'];
-        $mail->AddAttachment($file_tmp_selfie, $file_name_selfie);
-    }
-  
-    $cantidad_socios = intval($_POST['cantidad_socios']);
     $sociosFirstNameArr = array();
     $sociosLastNameArr = array();
     $sociosEmailArr = array();
+    $cantidadSocios =  $_POST['cantidadSocios'];
 
 
-    for($i=1; $i<$cantidad_socios; $i++) {
 
-        array_push($sociosFirstNameArr, $_POST['sociosFirstName-'.$i]);
-        array_push($sociosLastNameArr, $_POST['sociosLastName-'.$i]);
-        array_push($sociosEmailArr, $_POST['sociosEmail-'.$i]);
+    for($i=0; $i<$cantidadSocios; $i++) {
+        if(isset( $_POST['firstName'.$i])) {
+            array_push($sociosFirstNameArr, $_POST['firstName'.$i]);
+        }
+        if(isset($_POST['lastName'.$i])) {
+            array_push($sociosLastNameArr, $_POST['lastName'.$i]);
+        }
+        if(isset($_POST['email'.$i])){
+            array_push($sociosEmailArr, $_POST['email'.$i]);
+        }
+        if(isset($_FILES['passport'.$i])){
+            chmod($_FILES['passport'.$i]['tmp_name'], 0777);
+            $file_tmp_pass = $_FILES['passport'.$i]['tmp_name'];
+            $file_name_pass = $_FILES['passport'.$i]['name'];
+            $mail->AddAttachment($file_tmp_pass, $file_name_pass);
+        }
+        if(isset($_FILES['selfie'.$i])){
+            chmod($_FILES['selfie'.$i]['tmp_name'], 0777);
+            $file_tmp_selfie = $_FILES['selfie'.$i]['tmp_name'];
+            $file_name_selfie = $_FILES['selfie'.$i]['name'];
+            $mail->AddAttachment($file_tmp_selfie, $file_name_selfie);
+        }
     }
 
-    // Mensaje de socios.
+    $pagos =  $_POST['pagos'];
+    $nombre1 =  $_POST['firstCompanyName'];
+    $nombre2 =  $_POST['secondCompanyName'];
+    $nombre3 =  $_POST['thirdCompanyName'];
+    $plan =  $_POST['plan'];
+    $actividad =  $_POST['actividad'];
+
     $countPartner = count($sociosFirstNameArr);
-    $messagePartner = '
-                        <li>Primer Nombre socio 1: '. $firstName . '</li>
-                        <li>Apellidos socio 1:'. $lastName . '</li>
-                        <li>Correo electrónico socio 1: '. $email . '</li>
-    ';
 
-    foreach ($sociosFirstNameArr as $key => $value) {
+    $messagePartner = "";
 
-        $messagePartner .= '<li>Primer nombre socio '. $key+2 .': '.$value.'</li>';
+    for ($i=0; $i < $countPartner; $i++) {
+
+        $messagePartner .= '
+            
+        <li>Primer nombre socio: '.$sociosFirstNameArr[$i].'</li>
+        <li>Apellidos socio: '.$sociosLastNameArr[$i].'</li>
+        <li>Correo electronico socio: '.$sociosEmailArr[$i].'</li>
+        
+        
+        </br></br>';
     };
 
-    // <li>Apellidos socio '. $i+2 .': '.$sociosLastNameArr[$i].'</li>
-    // <li>Email socio '. $i+2 .': '.$sociosEmailArr[$i].'</li>
+    // echo json_encode($messagePartner);
 
     //Content
     $mail->isHTML(true);   //Set email format to HTML
@@ -137,12 +129,7 @@ try {
                 $mail->Body    = $message;
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 $mail->send();
-                echo 'Message has been sent';
+                echo 1;
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-
-
-// <li>Primer Nombre: '. $firstName . '</li>
-// <li>Apellidos:'. $lastName . '</li>
-// <li>Correo electrónico: '. $email . '</li>
