@@ -94,6 +94,7 @@ class Home extends Component {
               href="https://wa.link/w15z64"
               className="btn-wsp"
               target="_blank"
+              rel="noreferrer"
             >
               <img src={logoWhatsapp} alt="logo-ws" className="logo-ws" />
             </a>
@@ -428,7 +429,7 @@ class Home extends Component {
 
               <p>
                 <span className="symbol-type">US$</span>
-                <span className="price-type">2,500</span>
+                <span className="price-type">3,200</span>
               </p>
 
               <div className="container-mas-informacion">
@@ -451,7 +452,7 @@ class Home extends Component {
 
               <p>
                 <span className="symbol-type">US$</span>
-                <span className="price-type">3,400</span>
+                <span className="price-type">4,400</span>
               </p>
 
               <div className="container-mas-informacion2">

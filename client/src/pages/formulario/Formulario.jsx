@@ -7,6 +7,9 @@ import Thumb from "../../components/Thumb";
 import Spinner from "../../components/spinner/Spinner";
 // import Logo from "../assets2/logo-sinfondo2.png";
 import Logo from "../../assets2/logo-sinfondo2.png";
+// import dotenv from "dotenv";
+// require("dotenv").config();
+// dotenv.config();
 export default function Formulario() {
   const [successSent, setSuccessSent] = useState(false);
   const [errorSent, setErrorSent] = useState(false);
@@ -62,14 +65,21 @@ export default function Formulario() {
       setErrorSent(false);
       setEmailResponse("Tu formulario ha sido enviado exitosamente.");
     } else {
-      setErrorSent(true);
-      setSuccessSent(false);
-      setEmailResponse(res);
+      console.log(res);
+      // setErrorSent(true);
+      // setSuccessSent(false);
+      // setEmailResponse(res);
     }
     console.log(res);
     // setTimeout(() => setSuccessSent(false), 5000);
     // setTimeout(() => setErrorSent(false), 5000);
   };
+  console.log(
+    process.env.REACT_APP_URL,
+    process.env.REACT_APP_URL_SERVER,
+    process.env.NODE_ENV,
+    "algo"
+  );
   return (
     <>
       <div className="formulario">
@@ -326,6 +336,19 @@ export default function Formulario() {
                 <div className="companyname__container">
                   <div className="title__company">
                     <h3>Proporcionar 3 opciones de nombre para la empresa.</h3>
+                    <div
+                      style={{
+                        padding: "5px",
+                        // display: "flex",
+                        // alignItems: "center",
+                      }}
+                    >
+                      <span style={{ color: "red" }}>*</span>
+                      <span style={{ fontSize: "12px" }}>
+                        Cualquiera de las tres opciones puede ser usada para el
+                        registro de la empresa.
+                      </span>
+                    </div>
                   </div>
                   <div className="content__company">
                     <div className="formulario__input">
